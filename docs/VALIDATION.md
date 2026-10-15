@@ -1,11 +1,15 @@
 # Validation
 
-Validated in the current cloud instance on 2026-10-15 with Node 24 and system Chromium.
+## Wix migration update — 2026-10-16
 
-- ESLint: passed without warnings after configuration cleanup.
-- Production build and TypeScript: passed.
-- Five Playwright tests: all passed. Each page returned 200 and had no horizontal document overflow at 375, 768 and 1440 pixels. Mobile menu navigation passed. Invalid contact payload returned 400; valid unconfigured submission visibly reported no delivery. The empty gallery displayed its placeholder and hid empty filters.
-- A separate temporary-artwork browser check passed category filtering, original image loading, next/previous arrow keys, Escape and focus restoration. Test artwork was removed and is not portfolio content.
-- Desktop screenshot inspected. Content remains visible before JavaScript hydration; entrance movement respects reduced-motion settings.
+Validated in the cloud instance with Node 24 and system Chromium:
 
-Not verified: original Wix image content, real video playback, actual email provider acceptance/inbox delivery, screen reader audit, real iOS/Android hardware, a fresh published cloud task, or public Vercel deployment. There are no imported creatives to audit for duplicates or source-image quality yet. See MIGRATION.md for the network blocker.
+- ESLint, production build and TypeScript checks passed.
+- All **six Playwright tests passed**. Each of the five pages returned 200 without horizontal document overflow at widths of 375, 768 and 1440 pixels. Mobile navigation passed. Contact validation and the explicit unconfigured-delivery response still passed.
+- The actual populated gallery rendered 43 designs. Category filtering passed for book covers, social media and email marketing. Lightbox next/previous navigation, Escape, original-file link and focus restoration passed.
+- Every one of the 43 displayed portfolio images and both portrait images loaded successfully in Chromium.
+- A separate 375px mobile check passed on the full-length email artwork: no document overflow, next/close controls, and keyboard focus containment including the new original-file link.
+- Desktop homepage and mobile email-lightbox screenshots were visually inspected. Artwork retained its complete composition.
+- All 45 downloaded originals decoded successfully for metadata/optimization and have unique SHA-256 hashes. Original files are unchanged; optimized WebP derivatives are separate.
+
+Not verified: actual email provider delivery, a full screen reader audit, real iOS/Android hardware, or the updated Vercel deployment. The Vercel domain remains blocked from this execution environment, so a Git push alone does not establish that the public deployment completed. Missing source items and deliberately excluded Wix starter content are documented in MIGRATION.md.

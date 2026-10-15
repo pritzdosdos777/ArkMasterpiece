@@ -42,10 +42,65 @@ test("contact validates and truthfully reports unavailable delivery", async ({
     "Your message has not been sent",
   );
 });
-test("empty portfolio never represents placeholders as client work", async ({
+test("migrated gallery filters original artwork and supports the lightbox", async ({
   page,
 }) => {
   await page.goto("/portfolio");
-  await expect(page.getByText("Placeholder · no sample work")).toBeVisible();
-  await expect(page.locator(".filters")).toHaveCount(0);
+  await expect(page.locator(".project")).toHaveCount(43);
+  await expect(page.locator(".portfolio-pending")).toHaveCount(0);
+  await page.getByRole("button", { name: "Book Covers", exact: true }).click();
+  await expect(page.locator(".project")).toHaveCount(6);
+  const first = page.locator(".project").first();
+  await first.click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toHaveAccessibleName("Obedience — The Kingdom Culture");
+  await page.keyboard.press("ArrowRight");
+  await expect(dialog).toHaveAccessibleName("Live Not on Bread Alone");
+  await page.getByRole("button", { name: "Previous image" }).click();
+  await expect(dialog).toHaveAccessibleName("Obedience — The Kingdom Culture");
+  const original = dialog.getByRole("link", {
+    name: "Open full-resolution original",
+  });
+  await expect(original).toHaveAttribute("href", /book-covers.*\.png$/);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(first).toBeFocused();
+  await page
+    .getByRole("button", { name: "Email Marketing", exact: true })
+    .click();
+  await expect(page.locator(".project")).toHaveCount(6);
+  await page.getByRole("button", { name: "Social Media", exact: true }).click();
+  await expect(page.locator(".project")).toHaveCount(21);
+  await expect(
+    page.getByRole("button", { name: "Websites & Funnels", exact: true }),
+  ).toHaveCount(0);
+});
+test("all migrated artwork and portraits load", async ({ page }) => {
+  test.setTimeout(120000);
+  await page.goto("/portfolio");
+  const images = page.locator(".project img");
+  for (let i = 0; i < 43; i++) {
+    const image = images.nth(i);
+    await image.scrollIntoViewIfNeeded();
+    await expect(image).toBeVisible();
+    await expect
+      .poll(() =>
+        image.evaluate((e) => {
+          const img = e as HTMLImageElement;
+          return img.complete && img.naturalWidth > 0;
+        }),
+      )
+      .toBe(true);
+  }
+  for (const route of ["/", "/about"]) {
+    await page.goto(route);
+    const portrait = page.locator(".portrait-frame img");
+    await portrait.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        portrait.evaluate((e) => (e as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+  }
 });

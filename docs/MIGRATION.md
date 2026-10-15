@@ -1,21 +1,48 @@
-# Wix migration report
+# Wix portfolio migration
 
 Source: https://jeanmonicarche.wixsite.com/jean-monica-dosdos
 
-## Outcome
+## Completed import — 2026-10-16
 
-The environment's outbound proxy returned HTTP 403 at CONNECT before the Wix page could be fetched. A retry after saving required domains produced the same result. This is a network restriction, not evidence that the source has no content. No source pages or original images were accessible, and zero media assets were imported. No claims about project names, client work, biography, qualifications or testimonials were extracted.
+Access now succeeds. Downloaded **45 original files** from the publicly served Wix media URLs: **43 design/logo images and two professional photos**. All 45 files have different SHA-256 hashes. Original PNG/JPEG files are retained in `public/portfolio`; corresponding WebP files are used for the website. WebP images are resized proportionally to a maximum width of 2400px, without enlarging smaller files. No original design is cropped. The lightbox offers a link to each full-resolution original.
 
-Required domains saved in the environment draft: `jeanmonicarche.wixsite.com`, `static.wixstatic.com`, `video.wixstatic.com`. Saving a draft does not apply networking. Review and save these settings, then publish the cloud environment when ready; retry source access after the runtime policy changes. Additional linked sites may require separate domain access once discovered.
+The portfolio now contains:
 
-## Pending inventory
+| Category         |  Items |
+| ---------------- | -----: |
+| Book Covers      |      6 |
+| Logos & Branding |      4 |
+| Graphic Design   |      3 |
+| Social Media     |     21 |
+| Email Marketing  |      6 |
+| Product Design   |      3 |
+| **Total**        | **43** |
 
-All of the following remain unverified: homepage/about copy, portfolio and linked pages, graphic designs, logos, book covers, social/Meta ads, email designs, product designs, websites/funnels, video thumbnails/showreels, professional portrait, original Ark Masterpiece logo, contact email/social URLs, and any client testimonials. Counts, names and highest-resolution originals cannot be determined until access is restored.
+The homepage features a book cover, an ad creative, and an apparel design. Its About preview uses the studio photo; the About page uses the second portrait. The pink and blue **Ark Designs** logos remain portfolio artwork. They are not presented as a replacement permanent logo for **Ark Masterpiece**.
 
-## Manual handoff alternative
+`docs/wix-assets.json` records each source URL/page, source filename, original dimensions, local original, optimized version, byte size, and original SHA-256. `src/data/projects.json` contains the editable gallery content. Titles and alt text describe the visible art; no project outcomes, client endorsements, or testimonials have been invented.
 
-Provide an export or folder of authorized original creatives, the original logo and portrait, project titles/categories/descriptions, approved biography and service list, contact details and social URLs. Include testimonial text and permission to publish where applicable. Use original files rather than cropped screenshots. Check each asset's ownership and permissions. Add images following README instructions; preserve original aspect ratios. Track each source URL, local destination, original dimensions and duplicate checks in this report when migration resumes.
+## Public pages inspected
 
-## Current site treatment
+- Homepage, including every rendered artwork section.
+- `/about-9`.
+- `/portfolio`.
+- All six linked `/portfolio-collections/my-portfolio/project-title-1` through `project-title-6` pages.
+- Source media references in those pages, checked against the rendered image list.
 
-The portfolio displays a clearly labeled typographic placeholder, not invented client work. Empty categories are hidden. The JM block marks a pending portrait. Services carry owner-confirmation labels. Testimonials are a labeled draft. Contact email/social links are visibly pending; no fake addresses or links are used.
+The portfolio collection and its six project detail pages contain Wix starter material: the literal title “Project Title,” “Photography,” “April 2023,” “Create Your First Project,” and instructions to add a project description. Their 42 distinct `8bb438_…` images were excluded as template photography with unverified ownership, rather than presented as Jean Monica's work. Wix social icons and generic stock images such as “Remote Team Meeting” were also excluded. The About page's stock background video was excluded.
+
+The public sitemap path returned Wix's 404 page; discovery used public navigation and linked project pages instead. No authentication, access controls, or download restrictions were bypassed.
+
+## Missing / unavailable
+
+1. `small.png`: the source references `https://static.wixstatic.com/media/fda5a1_e5a2bbc6f73b456e8d591df3ecaf9fb7~mv2.png`. Both its original URL and the exact publicly referenced rendered URL returned HTTP 403. Its contents could not be inspected.
+2. An older image named in the header element's title, `fda5a1_ef41754824e7413d9e9cc478c3cd56f2~mv2.png`, also returned HTTP 403. The actual rendered header image is a different, successfully imported Ark Designs logo. The inaccessible reference may be obsolete; its contents remain unverified.
+3. The homepage has a “Showreel” heading but no playable owner video, iframe, or direct video file in its served content. No owner showreel was imported. The only video reference found was a Wix stock background on About.
+4. No website/funnel screenshots or linked owner website projects were found in the inspected public portfolio. No such category is shown.
+
+If the two inaccessible assets or a showreel are wanted, supply the original files directly. No other source-linked owner artwork download failed.
+
+## Maintenance
+
+To update a gallery item, edit `src/data/projects.json`. `image` points to the optimized WebP; `original` points to the untouched source PNG/JPEG. Use actual pixel dimensions for the image being rendered. Set `featured: true` on exactly three items to control the homepage selection. Retain aspect ratios and use truthful descriptions. See README for more detail.

@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { portraits } from "@/data/content";
 import { Intro, CTA } from "@/components/sections";
 export const metadata = {
   title: "About",
@@ -12,8 +14,14 @@ export default function About() {
         description="Hello, I’m Jean Monica. Let’s bring a little more intention to your digital world."
       />
       <section className="section about-preview">
-        <div className="monogram" aria-label="Professional portrait pending">
-          JM<span>PORTRAIT COMING SOON</span>
+        <div className="portrait-frame">
+          <Image
+            src={portraits.about}
+            alt="Jean Monica smiling in her professional portrait"
+            width={portraits.aboutWidth}
+            height={portraits.aboutHeight}
+            sizes="(max-width: 700px) 88vw, 40vw"
+          />
         </div>
         <div>
           <h2>

@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { portraits } from "@/data/content";
 import Link from "next/link";
 import { Arrow, Reveal } from "@/components/ui";
 import { CTA, Services, Testimonials } from "@/components/sections";
@@ -81,8 +83,14 @@ export default function Home() {
         </Link>
       </section>
       <section className="section about-preview">
-        <div className="monogram" aria-hidden="true">
-          JM<span>THE PERSON BEHIND THE IDEAS</span>
+        <div className="portrait-frame studio-portrait">
+          <Image
+            src={portraits.studio}
+            alt="Jean Monica wearing a dark blazer"
+            width={portraits.studioWidth}
+            height={portraits.studioHeight}
+            sizes="(max-width: 700px) 88vw, 40vw"
+          />
         </div>
         <Reveal>
           <p className="eyebrow">03 / MEET JEAN MONICA</p>

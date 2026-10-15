@@ -766,3 +766,39 @@ textarea {
     transition: none !important;
   }
 }
+
+/* Original portfolio artwork keeps its complete composition. */
+.preview-gallery {
+  columns: 3;
+}
+.preview-gallery .project {
+  display: inline-block;
+  vertical-align: top;
+}
+.portrait-frame {
+  background: var(--beige);
+  padding: 24px;
+}
+.portrait-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+}
+.original-link {
+  display: block;
+  width: fit-content;
+  margin: 10px auto 0;
+  padding: 8px 12px;
+  color: #ead8b7;
+  border-bottom: 1px solid #b4a58e;
+}
+@media (max-width: 700px) {
+  .preview-gallery {
+    columns: 1;
+  }
+  .portrait-frame {
+    padding: 16px;
+  }
+}

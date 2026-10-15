@@ -9,7 +9,11 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
   const close = useRef<HTMLButtonElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const filtered = projects
-    .filter((p) => category === "All Projects" || p.category === category)
+    .filter((p) =>
+      preview
+        ? p.featured
+        : category === "All Projects" || p.category === category,
+    )
     .slice(0, preview ? 3 : undefined);
   const categories = [
     "All Projects",
@@ -30,8 +34,8 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
         );
       if (e.key === "Tab") {
         const buttons =
-          close.current?.parentElement?.querySelectorAll<HTMLButtonElement>(
-            "button",
+          close.current?.parentElement?.querySelectorAll<HTMLElement>(
+            "button, a[href]",
           );
         if (!buttons) return;
         const first = buttons[0],
@@ -91,7 +95,7 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
           </div>
         </div>
       ) : (
-        <div className="gallery">
+        <div className={preview ? "gallery preview-gallery" : "gallery"}>
           {filtered.map((p, i) => (
             <button
               className="project"
@@ -152,6 +156,16 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
             />
             <figcaption>
               {filtered[active].title} · {active + 1} / {filtered.length}
+              {filtered[active].original && (
+                <a
+                  className="original-link"
+                  href={filtered[active].original}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open full-resolution original ↗
+                </a>
+              )}
               {filtered[active].description && (
                 <p>{filtered[active].description}</p>
               )}

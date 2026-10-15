@@ -1,3 +1,4 @@
+import importedProjects from "./projects.json";
 export const site = {
   name: "Ark Masterpiece",
   owner: "Jean Monica",
@@ -47,8 +48,20 @@ export type Project = {
   width: number;
   height: number;
   description?: string;
+  original?: string;
+  featured?: boolean;
 };
 // Add only owner-approved original artwork. See README for the complete guide.
-export const projects: Project[] = [];
+export const projects: Project[] = importedProjects;
 export const testimonials: { quote: string; name: string; role?: string }[] =
   [];
+
+export const portraits = {
+  studio:
+    "/portfolio/brand/491149302-3571333653169275-6331022036814-eafc8697.webp",
+  studioWidth: 1365,
+  studioHeight: 2048,
+  about: "/portfolio/brand/new-0cf372e9.webp",
+  aboutWidth: 1889,
+  aboutHeight: 2534,
+};
