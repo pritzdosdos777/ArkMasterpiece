@@ -43,7 +43,7 @@ Run `npm run lint`, `npm run typecheck`, `npm run build`, and `npm test`. Browse
 
 Use actual pixel dimensions for the rendered image and descriptive alt text. Keep an untouched original and reference it using `original` so visitors can open it from the lightbox. Set `featured: true` on six projects to choose the homepage showcase. Images retain their proportions; no content is cropped. Only categories with real projects appear. Use the five Wix category names exactly: Book Covers, Designs & Logos, Social Media Graphics, Email Marketing Designs, Product Designs. Their display order is set in `portfolioCategories` in `src/data/content.ts`. Gallery buttons open the full image; Escape closes, arrow keys navigate, Tab stays in the dialog. Next Image creates optimized variants automatically. Do not put confidential or unlicensed work in public assets. Videos currently require a separate authorized hosted link or a future player integration; the current gallery supports images and video thumbnails only.
 
-Update `site.email` and `site.socials` with verified contact details. Proposed services need owner confirmation. Add only verified testimonials to the typed array; otherwise the section remains clearly marked as draft. The text wordmark is temporary, not a permanent logo. Fonts use a local system Georgia/Arial stack to avoid external font requests; licensed local font files can replace them later.
+Update `site.email` and `site.socials` with verified contact details. Proposed services need owner confirmation. Add only verified testimonials to the typed array; otherwise the section remains clearly marked as draft. The shared brand component displays the prepared gold mark beside the business name. Fonts use a local system Georgia/Arial stack to avoid external font requests; licensed local font files can replace them later.
 
 ## Contact delivery
 
@@ -80,6 +80,27 @@ The offline ZIP in `downloads/` is an earlier review snapshot from before artwor
 
 The current design follows the owner-supplied reference: a dark editorial hero, champagne gold buttons, cream service panels, a six-item portfolio showcase, real founder portrait, four-step process and a photographic contact banner. The same colors, typography and navigation apply to all five pages. On mobile, the navigation collapses, services become stacked rows, and the work showcase becomes a two-column grid. Reduced-motion preferences remain supported.
 
-`public/brand/studio-desk.webp` is a generated decorative studio scene, not client work or a real business premises. The actual portfolio and founder photos remain original Wix imports. The approved Ark Masterpiece image logo has only been supplied inline in chat, without a retrievable file; `src/components/brand.tsx` uses the business name as typography until the original PNG/JPG is available. No permanent replacement symbol has been invented.
+`public/brand/studio-desk.webp` is a generated decorative studio scene, not client work or a real business premises. The actual portfolio and founder photos remain original Wix imports. The supplied gold logo is now displayed in the shared header and footer. `public/brand/ark-masterpiece-logo.webp` is an image-tool-prepared version of the inline attachment, not a byte-identical original upload or vector master. The full prepared mark and wordmark are included in the downloadable collection; the header/footer display its mark beside accessible typography.
 
 The email address and Facebook, Instagram and LinkedIn links in `site` come from the public Wix contact/About sections. Consultation buttons lead to an inquiry page, not an automated calendar booking. Form delivery still requires configuration; visitors can use the published business email directly. Unverified testimonials are omitted from the homepage.
+
+## Portfolio mockup presentations
+
+All **43 portfolio items** have a separate rendered mockup in `public/portfolio/mockups/`. The five Wix collections and their source order remain intact. The gallery defaults to mockups; “Original artwork” switches to the preserved designs. The fullscreen viewer has the same switch and a full-resolution original link. The homepage's six featured items also show their mockups.
+
+- Book covers: physical book presentations with covers, spine and page edges.
+- Logos: illustrative mounted brand signs.
+- Other graphics: framed print presentations.
+- Social graphics and Meta ad creatives: laptop or phone previews, chosen for the artwork's proportions.
+- Email designs: tablet previews with the complete layout preserved.
+- Product artwork: concept display boards, preserving the existing garment mockups inside the supplied art.
+
+The images are concept presentations, not evidence of real installations, live posts, campaign metrics, or printed production. No client names, social engagement counts or results have been invented. Portraits remain real photos and are not included in these 43 creative mockups.
+
+`src/components/mockup.tsx` and the scene styles in `globals.css` are the editable book/sign/device templates. Each scene uses the actual unmodified portfolio image. `public/brand/mockup-studio.webp` is a generated decorative backdrop. `src/data/mockups.ts` chooses suitable templates; a project's optional `mockup` metadata points to its rendered export. The gallery's original `image`, `original`, dimensions and source hashes remain unchanged.
+
+### Export / refresh
+
+The 43 portable presentation images were rendered from the templates with Chromium at 3× pixel density. `docs/mockup-manifest.json` maps each export to its project and source. To refresh them, back up `src/data/projects.json`, temporarily remove its `mockup` fields, build and start that version, then run `node scripts/render-mockups.mjs` from the repository root. The script refuses to screenshot existing exports. It writes all metadata only after rendering succeeds. Restore the backup on failure. Stop the server, rebuild and verify the updated gallery afterwards.
+
+Run `node scripts/package-mockups.mjs` to create the downloadable PNG collection. This needs Node, sharp and Python 3. Temporary PNGs are written under the ignored `.mockup-exports/`; the ZIP is saved to `downloads/Ark-Masterpiece-Mockup-Collection.zip`. They are presentation-resolution PNGs, not print-production masters or editable 3D files.

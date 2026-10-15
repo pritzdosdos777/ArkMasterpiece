@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/ui";
 import { Footer } from "@/components/sections";
 export const metadata: Metadata = {
+  icons: { icon: "/brand/ark-masterpiece-logo.webp" },
   title: {
     default: "Ark Masterpiece | Creative & Digital Services",
     template: "%s | Ark Masterpiece",

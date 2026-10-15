@@ -1,3 +1,4 @@
+import type { MockupKind } from "./mockups";
 import importedProjects from "./projects.json";
 export const site = {
   name: "Ark Masterpiece",
@@ -57,9 +58,10 @@ export type Project = {
   description?: string;
   original?: string;
   featured?: boolean;
+  mockup?: { src: string; width: number; height: number; kind: MockupKind };
 };
 // Add only owner-approved original artwork. See README for the complete guide.
-export const projects: Project[] = importedProjects;
+export const projects: Project[] = importedProjects as Project[];
 export const testimonials: { quote: string; name: string; role?: string }[] =
   [];
 

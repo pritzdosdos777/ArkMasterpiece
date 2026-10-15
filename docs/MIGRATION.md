@@ -50,4 +50,8 @@ To update a gallery item, edit `src/data/projects.json`. `image` points to the o
 
 Collections now follow the exact five Wix section names and their order. Within each collection, artwork follows its source sequence. The additional pink Ark Designs logo from the source header is placed last in Designs & Logos. Each section has its own heading and item count. Balanced row grids replace the mixed masonry view; consistent frames use `object-fit: contain` and preserve all artwork. The category filter and lightbox remain available.
 
-The new gold-on-black Ark Masterpiece logo was shown inline in chat but has not been delivered to the execution workspace as a retrievable file. Installing that exact artwork remains pending a PNG/JPG attachment; it has not been recreated or replaced with a generated approximation.
+The supplied gold-on-black logo is now displayed using an image-tool-prepared version of the inline attachment. The prepared asset is retained under `public/brand/ark-masterpiece-logo.webp`. It is not the original upload's exact bytes or a vector master. No logo redesign was requested; this preparation followed the supplied mark and wordmark.
+
+## Mockup extension
+
+All 43 creative images now have separate book, sign, framed print, laptop, phone, tablet or apparel-display presentations. Original artwork files and hashes remain intact. The gallery lets visitors choose presentations or original designs, and its fullscreen viewer keeps the full-resolution source link. `docs/mockup-manifest.json` records the exported files and their original sources. These are illustrative mockups, not actual social posts, production proofs or shop installations.

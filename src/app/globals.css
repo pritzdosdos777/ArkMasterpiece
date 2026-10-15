@@ -1562,3 +1562,530 @@ textarea {
   min-width: 16px;
   text-align: center;
 }
+
+/* Supplied gold mark, prepared from the chat attachment. The image is never redrawn in CSS. */
+.brand {
+  flex-direction: row;
+  align-items: center;
+  gap: 13px;
+}
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.brand-symbol {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #000;
+}
+.brand-symbol img {
+  display: block;
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  max-width: none;
+  left: -9.2px;
+  top: -5.7px;
+}
+.portfolio-view-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 0 0 24px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #b99c7040;
+}
+.portfolio-view-controls p {
+  font-size: 12px;
+  max-width: 520px;
+  margin: 0;
+}
+.view-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #b99c7070;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+.view-switch button {
+  padding: 10px 13px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  font-size: 11px;
+}
+.view-switch button[aria-pressed="true"] {
+  background: #1b1712;
+  color: #ebc89f;
+}
+.project-image.presentation-image,
+.category-grid .project-image.presentation-image {
+  aspect-ratio: 4/3;
+  padding: 0;
+  background: #dfcfba;
+  border: 1px solid #ad936c40;
+}
+.project-image.presentation-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.project:hover .project-image.presentation-image > img {
+  transform: none;
+}
+.project-caption .mockup-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  color: #84603f;
+  letter-spacing: 0.03em;
+}
+.preview-gallery .project-caption .mockup-label {
+  color: #c3a17c;
+}
+.dialog-view-switch {
+  margin: 10px auto 0;
+  display: block;
+  font-size: 11px;
+}
+.lightbox .dialog-view-switch {
+  padding: 8px 12px;
+  min-height: 38px;
+}
+.lightbox .mockup-scene {
+  width: min(900px, 70vw);
+}
+.presentation-disclosure {
+  font-size: 10px;
+  margin: 5px 0 0;
+  color: #c8b9a6;
+}
+/* Editable physical display templates, also used to render downloadable presentation images. */
+.mockup-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dfd1be url("/brand/mockup-studio.webp") center / cover;
+  perspective: 1000px;
+  container-type: inline-size;
+}
+.mockup-scene *,
+.mockup-scene img {
+  box-sizing: border-box;
+}
+.mockup-scene img.mockup-artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: none !important;
+  transition: none;
+}
+.scene-floor-shadow {
+  position: absolute;
+  left: 19%;
+  bottom: 10%;
+  width: 65%;
+  height: 7%;
+  border-radius: 50%;
+  background: #3f291b3d;
+  filter: blur(9px);
+}
+.book-prop {
+  position: absolute;
+  width: 34%;
+  aspect-ratio: var(--art-ratio);
+  bottom: 16%;
+  left: 34%;
+  transform: rotateY(-20deg) rotateZ(-6deg);
+  transform-style: preserve-3d;
+  box-shadow: -12px 18px 19px #49301f59;
+}
+.book-prop:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -6%;
+  width: 7%;
+  background: linear-gradient(90deg, #33281d, #76634e 45%, #30271c);
+  transform-origin: right;
+  transform: skewY(10deg);
+  border-radius: 3px 0 0 3px;
+}
+.book-prop:after {
+  content: "";
+  position: absolute;
+  top: 1.5%;
+  bottom: -1%;
+  right: -5%;
+  width: 5%;
+  background: repeating-linear-gradient(
+    0deg,
+    #e1d8c9 0px,
+    #e1d8c9 1px,
+    #fff7eb 1px,
+    #fff7eb 3px
+  );
+  transform: skewY(-15deg);
+  z-index: -1;
+  border: 1px solid #c0b29f;
+}
+.book-cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 1px 4px 4px 1px;
+}
+.book-cover img.mockup-artwork {
+  object-fit: fill;
+}
+.book-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #0004,
+    transparent 5%,
+    #fff2 8%,
+    transparent 13%,
+    transparent 85%,
+    #0001
+  );
+  pointer-events: none;
+}
+.sign-prop {
+  position: absolute;
+  left: 16%;
+  top: 23%;
+  width: 68%;
+  height: 48%;
+  padding: 8%;
+  background: linear-gradient(145deg, #26231e, #0e0e0d);
+  border: 3px solid #70614e;
+  border-radius: 2px;
+  box-shadow:
+    5px 12px 0 #a68f7055,
+    13px 24px 22px #49321a59,
+    inset 0 0 0 1px #b49c764d;
+  transform: rotateY(-10deg) rotateZ(-2deg);
+}
+.sign-fixing {
+  position: absolute;
+  top: 5%;
+  width: 1.4%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #d3b586, #4a3d2b);
+  box-shadow: 0 1px 1px #000;
+}
+.fixing-left {
+  left: 3%;
+}
+.fixing-right {
+  right: 3%;
+}
+.poster-prop {
+  position: absolute;
+  top: 11%;
+  bottom: 14%;
+  left: 28%;
+  width: 44%;
+  padding: 2%;
+  background: linear-gradient(120deg, #28231c, #887258 48%, #3b3023);
+  box-shadow: 9px 14px 20px #30200e66;
+  transform: rotateZ(-3deg);
+}
+.poster-mat {
+  width: 100%;
+  height: 100%;
+  padding: 8%;
+  background: #fff8ec;
+  box-shadow: inset 0 0 6px #3b261c40;
+}
+.device-prop {
+  position: absolute;
+  filter: drop-shadow(12px 16px 12px #3f2e1c66);
+}
+.device-screen {
+  position: absolute;
+  inset: 0;
+  background: #f4f2ed;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 8% minmax(0, 1fr) 5%;
+  box-shadow: inset 0 0 0 1px #fff3;
+}
+.device-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7%;
+  background: #e7e4de;
+  color: #756958;
+  font:
+    2cqw Arial,
+    sans-serif;
+  letter-spacing: 0;
+  border-bottom: 1px solid #c9c0b0;
+}
+.window-dots {
+  display: flex;
+  gap: 3px;
+  position: absolute;
+  left: 4%;
+}
+.window-dots i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ac9b85;
+}
+.device-artwork {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+  padding: 3%;
+  background: linear-gradient(135deg, #fffdf8, #e9e4da);
+}
+.device-artwork img.mockup-artwork {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.device-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+  background: #e8e4dc;
+}
+.device-bottom > span {
+  width: 8%;
+  height: 1px;
+  background: #c4baaa;
+}
+.laptop-prop {
+  top: 16%;
+  left: 12%;
+  width: 76%;
+  height: 61%;
+  background: linear-gradient(
+    135deg,
+    #5d5952,
+    #141414 7%,
+    #101010 90%,
+    #6d6457
+  );
+  padding: 1.6%;
+  border-radius: 7px 7px 3px 3px;
+  transform: rotateY(-8deg) rotateZ(-2deg);
+}
+.laptop-prop .device-screen {
+  inset: 4% 3% 6%;
+  border-radius: 2px;
+}
+.laptop-prop:before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #555;
+  left: 50%;
+  top: 1.5%;
+}
+.laptop-base {
+  position: absolute;
+  left: -7%;
+  bottom: -5%;
+  width: 114%;
+  height: 7%;
+  border-radius: 1px 1px 35% 35%;
+  background: linear-gradient(#b7afa3, #e1d9cb 35%, #7c756a 50%, #524b42);
+  box-shadow: 0 3px 2px #55422c66;
+}
+.laptop-base:after {
+  content: "";
+  position: absolute;
+  left: 41%;
+  width: 18%;
+  top: 0;
+  height: 35%;
+  background: #655c50;
+  border-radius: 0 0 6px 6px;
+}
+.phone-prop {
+  top: 9%;
+  bottom: 13%;
+  width: 32%;
+  left: 35%;
+  border-radius: 22px;
+  background: linear-gradient(
+    120deg,
+    #9d9183,
+    #181716 12%,
+    #0f0f0f 92%,
+    #a18b6d
+  );
+  transform: rotateZ(7deg);
+}
+.phone-prop .device-screen {
+  inset: 3% 5%;
+  border-radius: 17px;
+  grid-template-rows: 10% minmax(0, 1fr) 7%;
+}
+.phone-prop .device-toolbar {
+  font-size: 1.6cqw;
+  padding-top: 6%;
+}
+.phone-prop .window-dots {
+  display: none;
+}
+.phone-prop:after {
+  content: "";
+  position: absolute;
+  left: 35%;
+  top: 3.5%;
+  width: 30%;
+  height: 3%;
+  border-radius: 0 0 8px 8px;
+  background: #111;
+}
+.tablet-prop {
+  top: 8%;
+  bottom: 12%;
+  left: 25%;
+  width: 50%;
+  background: linear-gradient(
+    120deg,
+    #b3a38c,
+    #151413 8%,
+    #151413 91%,
+    #968368
+  );
+  border-radius: 14px;
+  transform: rotateZ(-5deg);
+}
+.tablet-prop .device-screen {
+  inset: 4% 5%;
+  border-radius: 7px;
+  grid-template-rows: 7% minmax(0, 1fr) 4%;
+}
+.tablet-prop .device-toolbar {
+  font-size: 1.9cqw;
+}
+.tablet-prop .window-dots {
+  display: none;
+}
+.product-prop {
+  position: absolute;
+  width: 78%;
+  height: 60%;
+  left: 11%;
+  top: 18%;
+  transform: rotateY(-9deg) rotateZ(-4deg);
+}
+.product-display {
+  width: 100%;
+  height: 100%;
+  padding: 3%;
+  background: linear-gradient(135deg, #f9f4eb, #ba9a72);
+  border: 1px solid #c4ac8a;
+  box-shadow: 9px 15px 18px #4f38255c;
+}
+.display-stand {
+  position: absolute;
+  left: 17%;
+  width: 66%;
+  bottom: -8%;
+  height: 7%;
+  background: linear-gradient(#b99e78, #7e6141);
+  transform: skewX(-25deg);
+  box-shadow: 5px 6px 8px #4f382536;
+}
+@media (max-width: 1050px) {
+  header .brand-name {
+    font-size: 19px;
+  }
+  header nav {
+    gap: 12px;
+  }
+}
+@media (max-width: 950px) {
+  header .menu-toggle {
+    display: flex;
+  }
+  header nav {
+    display: none;
+    position: absolute;
+    top: 94px;
+    left: 0;
+    right: 0;
+    background: #11100e;
+    padding: 24px 6%;
+    border-bottom: 1px solid #b58b5e50;
+  }
+  header nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+}
+@media (max-width: 600px) {
+  header {
+    gap: 10px;
+  }
+  .brand {
+    gap: 9px;
+  }
+  header .brand-name {
+    font-size: 17px;
+  }
+  .brand-tagline {
+    font-size: 5.7px;
+  }
+  .brand-symbol {
+    width: 40px;
+    height: 40px;
+  }
+  .brand-symbol img {
+    width: 55.4px;
+    height: 55.4px;
+    left: -7.2px;
+    top: -4.5px;
+  }
+  header nav {
+    top: 79px;
+  }
+  .portfolio-view-controls {
+    display: block;
+  }
+  .portfolio-view-controls p {
+    font-size: 11px;
+    margin-bottom: 15px;
+  }
+  .view-switch button {
+    font-size: 10px;
+  }
+  .lightbox .mockup-scene {
+    width: 71vw;
+  }
+  .presentation-disclosure {
+    font-size: 9px;
+  }
+}

@@ -3,7 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, X, Expand } from "lucide-react";
 import { projects, portfolioCategories, type Project } from "@/data/content";
+import { Mockup } from "./mockup";
+import { mockupKind, mockupLabels } from "@/data/mockups";
 export function Gallery({ preview = false }: { preview?: boolean }) {
+  const [view, setView] = useState<"mockups" | "originals">("mockups");
+  const [dialogView, setDialogView] = useState<"mockups" | "originals">(
+    "mockups",
+  );
   const [category, setCategory] = useState("All Projects");
   const [active, setActive] = useState<number | null>(null);
   const close = useRef<HTMLButtonElement>(null);
@@ -26,25 +32,40 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
     return (
       <button
         className="project"
+        data-project-id={p.id}
         key={p.id}
         onClick={(e) => {
           trigger.current = e.currentTarget;
+          setDialogView(view);
           setActive(filtered.indexOf(p));
         }}
       >
-        <div className="project-image">
-          <Image
-            src={p.image}
-            alt={p.alt}
-            width={p.width}
-            height={p.height}
-            sizes="(max-width: 600px) 88vw, (max-width: 1000px) 44vw, 29vw"
-          />
+        <div
+          className={
+            view === "mockups"
+              ? "project-image presentation-image"
+              : "project-image"
+          }
+        >
+          {view === "mockups" ? (
+            <Mockup project={p} />
+          ) : (
+            <Image
+              src={p.image}
+              alt={p.alt}
+              width={p.width}
+              height={p.height}
+              sizes="(max-width: 600px) 88vw, (max-width: 1000px) 44vw, 29vw"
+            />
+          )}
           <Expand className="expand" aria-hidden="true" />
         </div>
         <span className="project-caption">
           <strong>{p.title}</strong>
           {preview && <span>{p.category}</span>}
+          {view === "mockups" && (
+            <span className="mockup-label">{mockupLabels[mockupKind(p)]}</span>
+          )}
         </span>
       </button>
     );
@@ -88,6 +109,33 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
   }, [isOpen, filtered.length]);
   return (
     <>
+      {!preview && (
+        <div className="portfolio-view-controls">
+          <p>
+            Explore the artwork in styled presentation mockups, or switch to the
+            original designs. These are concept displays, not live posts or shop
+            installations.
+          </p>
+          <div
+            className="view-switch"
+            role="group"
+            aria-label="Portfolio display"
+          >
+            <button
+              aria-pressed={view === "mockups"}
+              onClick={() => setView("mockups")}
+            >
+              Mockup presentations
+            </button>
+            <button
+              aria-pressed={view === "originals"}
+              onClick={() => setView("originals")}
+            >
+              Original artwork
+            </button>
+          </div>
+        </div>
+      )}
       {!preview && projects.length > 0 && (
         <div className="filters" aria-label="Filter projects">
           {categories.map((c) => (
@@ -182,15 +230,36 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
             <ArrowLeft />
           </button>
           <figure>
-            <Image
-              src={filtered[active].image}
-              alt={filtered[active].alt}
-              width={filtered[active].width}
-              height={filtered[active].height}
-              sizes="90vw"
-            />
+            {dialogView === "mockups" ? (
+              <Mockup project={filtered[active]} large />
+            ) : (
+              <Image
+                src={filtered[active].image}
+                alt={filtered[active].alt}
+                width={filtered[active].width}
+                height={filtered[active].height}
+                sizes="90vw"
+              />
+            )}
             <figcaption aria-live="polite">
               {filtered[active].title} · {active + 1} / {filtered.length}
+              {dialogView === "mockups" && (
+                <p className="presentation-disclosure">
+                  Presentation mockup · original artwork preserved
+                </p>
+              )}
+              <button
+                className="dialog-view-switch"
+                onClick={() =>
+                  setDialogView(
+                    dialogView === "mockups" ? "originals" : "mockups",
+                  )
+                }
+              >
+                {dialogView === "mockups"
+                  ? "Show original artwork"
+                  : "Show mockup presentation"}
+              </button>
               {filtered[active].original && (
                 <a
                   className="original-link"
