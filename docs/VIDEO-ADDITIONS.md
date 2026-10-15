@@ -1,16 +1,36 @@
 # Owner video additions
 
-The owner authorized these eight additions. Every `download_file` call returned **file exceeds the executor transfer limit of 32 MiB**. No source video was downloaded, transcoded, inspected or published. No filenames have been represented as playable media. The portfolio section is implemented with eight clearly marked pending cards and a native-player path ready for actual sources.
+## Latest supplied videos
 
-## Awaiting retrievable video files
+The seven replacement/new attachments were successfully downloaded. Each is supplied by the owner for inclusion in the portfolio:
 
-- `Stem-Cell-RX-75s-Voiceover.mp4`
-- `MATTIA New Shockwave.mp4`
-- `Inspire Pakcage $49.mp4`
-- `Blair.mp4`
-- `Sierra Soc 2.mp4`
-- `Sierra Soc 5.mp4`
-- `Sierra Soc 3.mp4`
-- `Sierra Soc 4.mp4`
+- Spinal-Candidate-Edited.mp4 → Spinal Candidate
+- Sierra 2.mov → Sierra — 2
+- Sierra 3.mov → Sierra — 3
+- Back-on-Trac-Edited.mp4 → Back on Trac
+- Sierra 1.mov → Sierra — 1
+- Sierra 4.mov → Sierra — 4
+- Stem Cell RX.mov → Stem Cell RX
 
-Provide each as an upload smaller than 32 MiB (preferably under 30 MB), or an accessible direct download URL. The transfer limit applies before local compression is possible. Once available: inspect durations/dimensions/codecs, optimize playback copies if needed, extract real posters, obtain accurate captions where available, set sources in `src/data/videos.json`, and test loading, playback, seeking, audio and fullscreen on desktop/mobile. Do not mark these checks passed before actual footage is accessible.
+The website displays these seven verified files, replacing the previous pending cards. The new Sierra names are retained without assuming correspondence with the old SOC filenames. The new Spinal Candidate and Back on Trac clips are not relabeled as Mattia, Inspire or Blair.
+
+## Processing
+
+All source streams were inspected with ffprobe. The MOV sources use HEVC, so all seven web copies are consistently encoded as H.264 (CRF 23, medium preset, yuv420p, 30 fps) with AAC audio at 128 kbps and fast-start MP4 metadata. The full footage, original audio and 720×1280 framing are retained; the 60 fps Sierra 1 source is rendered at 30 fps for the web. Posters are actual frames extracted at two seconds. No artwork, claims, people, footage or transcripts were generated. Original files remain intact in the attachment workspace and are not duplicated into the public repository. `video-manifest.json` records source/output SHA-256 hashes, sizes, duration and conversion settings.
+
+No separate caption files were supplied. Existing on-screen text remains part of the video; no claim of complete closed captions is made.
+
+## Earlier blocked submissions
+
+The previous eight attachment downloads exceeded the 32 MiB transfer limit. Their source media was not accessible and has not been represented as available:
+
+- Stem-Cell-RX-75s-Voiceover.mp4
+- MATTIA New Shockwave.mp4
+- Inspire Pakcage $49.mp4
+- Blair.mp4
+- Sierra Soc 2.mp4
+- Sierra Soc 5.mp4
+- Sierra Soc 3.mp4
+- Sierra Soc 4.mp4
+
+The latest seven uploads are the current website collection. Any additional earlier videos require accessible copies and explicit source identification before adding them.

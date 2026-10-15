@@ -168,14 +168,12 @@ test("Gmail calls to action and service navigation work", async ({ page }) => {
   await expect(page.locator(".hero h1")).toContainText("Creative Partner");
   await expect(page.locator(".compact-services .service")).toHaveCount(6);
   await expect(page.locator(".process li")).toHaveCount(4);
-  await page
-    .context()
-    .route("https://mail.google.com/**", (route) =>
-      route.fulfill({
-        contentType: "text/html",
-        body: "<title>Gmail compose test</title>",
-      }),
-    );
+  await page.context().route("https://mail.google.com/**", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<title>Gmail compose test</title>",
+    }),
+  );
   const popupPromise = page.waitForEvent("popup");
   await page
     .locator(".hero")
@@ -249,16 +247,123 @@ test("featured work uses the requested book cover and Moses design", async ({
   await expect(showcase).not.toContainText("Live Not on Bread Alone");
 });
 
-test("video section lists the eight pending uploads without broken players", async ({
+test("video section contains seven ready videos with real posters", async ({
   page,
+  request,
 }) => {
   await page.goto("/portfolio");
   await page.getByRole("link", { name: "Explore video editing ↓" }).click();
   await expect(page.locator("#video-heading")).toBeInViewport();
-  await expect(page.locator(".video-card")).toHaveCount(8);
-  await expect(page.locator(".video-pending")).toHaveCount(8);
-  await expect(page.locator(".video-card video")).toHaveCount(0);
-  await expect(page.locator(".video-portfolio")).toContainText(
-    "previews are being prepared",
+  await expect(page.locator(".video-card")).toHaveCount(7);
+  await expect(page.locator(".video-pending")).toHaveCount(0);
+  const players = page.locator(".video-card video");
+  await expect(players).toHaveCount(7);
+  for (const player of await players.all()) {
+    await expect(player).toHaveAttribute("preload", "none");
+    await expect(player).toHaveAttribute("controls", "");
+    const poster = (await player.getAttribute("poster"))!;
+    expect((await request.get(poster)).status()).toBe(200);
+    const src = (await player.getAttribute("src"))!;
+    const range = await request.get(src, {
+      headers: { Range: "bytes=0-1023" },
+    });
+    expect(range.status()).toBe(206);
+    expect(range.headers()["content-type"]).toContain("video/mp4");
+    expect((await range.body()).length).toBe(1024);
+  }
+});
+
+for (const width of [1440, 375]) {
+  test(`real video playback and seeking at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/portfolio");
+    const videos = page.locator(".video-card video");
+    for (const player of await videos.all()) {
+      await player.scrollIntoViewIfNeeded();
+      await player.evaluate(async (node) => {
+        const video = node as HTMLVideoElement;
+        video.muted = true;
+        await video.play();
+      });
+      await expect
+        .poll(() =>
+          player.evaluate((node) => (node as HTMLVideoElement).currentTime),
+        )
+        .toBeGreaterThan(0.1);
+      await expect
+        .poll(() =>
+          player.evaluate((node) => (node as HTMLVideoElement).videoWidth),
+        )
+        .toBe(720);
+      const bounds = await player.boundingBox();
+      expect(bounds).not.toBeNull();
+      expect(bounds!.width / bounds!.height).toBeCloseTo(9 / 16, 2);
+      const duration = await player.evaluate(
+        (node) => (node as HTMLVideoElement).duration,
+      );
+      expect(duration).toBeGreaterThan(35);
+      await player.evaluate((node) => {
+        const video = node as HTMLVideoElement;
+        video.currentTime = video.duration / 2;
+      });
+      await expect
+        .poll(() =>
+          player.evaluate((node) => !(node as HTMLVideoElement).seeking),
+        )
+        .toBe(true);
+      await player.evaluate((node) => (node as HTMLVideoElement).pause());
+    }
+  });
+}
+
+test("playing another clip pauses the previous clip", async ({ page }) => {
+  await page.goto("/portfolio");
+  const players = page.locator(".video-card video");
+  for (const i of [0, 1])
+    await players.nth(i).evaluate(async (node) => {
+      const video = node as HTMLVideoElement;
+      video.muted = true;
+      await video.play();
+    });
+  await expect
+    .poll(() =>
+      players.nth(0).evaluate((node) => (node as HTMLVideoElement).paused),
+    )
+    .toBe(true);
+  await expect
+    .poll(() =>
+      players.nth(1).evaluate((node) => (node as HTMLVideoElement).paused),
+    )
+    .toBe(false);
+});
+
+test("video load failures offer a direct-open fallback", async ({ page }) => {
+  await page.route("**/portfolio/videos/*.mp4", (route) => route.abort());
+  await page.goto("/portfolio");
+  await page
+    .locator(".video-card video")
+    .first()
+    .evaluate((node) => (node as HTMLVideoElement).load());
+  const card = page.locator(".video-card").first();
+  await expect(card.getByRole("status")).toContainText("could not load");
+  await expect(
+    card.getByRole("link", { name: "Open video in a new tab" }),
+  ).toHaveAttribute("href", /spinal-candidate\.mp4$/);
+});
+
+test("video fullscreen opens and closes", async ({ page }) => {
+  await page.goto("/portfolio");
+  const player = page.locator(".video-card video").first();
+  await player.scrollIntoViewIfNeeded();
+  await player.click();
+  await player.evaluate((node) =>
+    (node as HTMLVideoElement).requestFullscreen(),
   );
+  await expect
+    .poll(() => page.evaluate(() => document.fullscreenElement?.tagName))
+    .toBe("VIDEO");
+  await page.evaluate(() => document.exitFullscreen());
+  await expect
+    .poll(() => page.evaluate(() => document.fullscreenElement === null))
+    .toBe(true);
 });

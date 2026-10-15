@@ -10,6 +10,8 @@ type VideoProject = {
   src: string | null;
   poster: string | null;
   captions: string | null;
+  width?: number;
+  height?: number;
 };
 
 function VideoCard({ video }: { video: VideoProject }) {
@@ -20,12 +22,25 @@ function VideoCard({ video }: { video: VideoProject }) {
         <>
           <video
             controls
+            width={video.width}
+            height={video.height}
+            style={{
+              aspectRatio: `${video.width || 9} / ${video.height || 16}`,
+            }}
             playsInline
             preload="none"
             poster={video.poster || undefined}
             src={video.src}
             aria-label={video.title}
             onError={() => setFailed(true)}
+            onPlay={(event) => {
+              const current = event.currentTarget;
+              document
+                .querySelectorAll(".video-portfolio video")
+                .forEach((player) => {
+                  if (player !== current) (player as HTMLVideoElement).pause();
+                });
+            }}
           >
             {video.captions && (
               <track

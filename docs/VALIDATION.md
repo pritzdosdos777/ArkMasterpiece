@@ -56,3 +56,14 @@ Updated the header, hero and shared CTA labels to “Let’s work together.” T
 Production build, ESLint and TypeScript passed. All **15 Playwright tests passed**, including the five responsive widths, expected Gmail URL/recipient and new-tab behavior (Gmail requests intercepted in the test), both featured replacements and eight honestly pending video cards with no broken players. Gmail account login and actual message delivery were not tested.
 
 Each of the eight submitted MP4 downloads failed with the executor's 32 MiB transfer-limit response. No video bytes were retrieved. The Video Editing section, data catalog and native playback/error handling are prepared, but all eight previews remain explicitly pending. Actual video decoding, audio, captions, seeking and fullscreen playback cannot be validated until retrievable files are supplied. See VIDEO-ADDITIONS.md. No video availability or public Vercel redeployment is claimed.
+
+
+## Seven playable owner videos
+
+The latest seven files were successfully retrieved. All were inspected and converted to browser-compatible H.264/AAC fast-start MP4, with full duration and portrait framing retained. Sierra 1 was converted from 60 fps to 30 fps. All seven have genuine poster frames extracted at two seconds. Source/output hashes and media information are recorded in `video-manifest.json`. The new seven-item catalog replaces the earlier pending cards without assuming correspondence to differently named unavailable uploads.
+
+Production build, ESLint and TypeScript checks passed. All **20 Playwright tests passed**. Every video played and sought successfully at 1440px and 375px; displayed portrait proportions were verified. Poster loading and MP4 byte-range responses passed for all seven. Fullscreen entry/exit, pausing the previous clip when a new clip starts, and a simulated load failure with direct-open fallback passed. The existing Gmail, featured-work, artwork-gallery and five responsive-width checks remain passing. Browser playback used muted audio; AAC streams were verified in all output files, but audible output was not manually assessed. Tests ran in system Chromium; physical iOS/Android devices, Safari and a screen reader audit were not run. No separate caption files were supplied.
+
+Public Vercel deployment remains unverified from this environment. Git push alone does not establish that Vercel finished rebuilding.
+
+The completed video section was visually inspected in 1440px desktop and 375px mobile screenshots. The three-column desktop gallery and single-column mobile gallery show actual poster frames with preserved portrait proportions.
