@@ -11,7 +11,7 @@ export function HeroVideo({ children }: { children: React.ReactNode }) {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setVisible(true), 3000);
+    const timer = window.setTimeout(() => setVisible(true), 1000);
     return () => window.clearTimeout(timer);
   }, []);
 

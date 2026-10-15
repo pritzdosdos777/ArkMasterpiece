@@ -512,7 +512,7 @@ test("all portfolio images stay visible without motion on mobile", async ({
   ).toBe(true);
 });
 
-test("hero video appears after three seconds, dims the backdrop and can be dismissed", async ({
+test("hero video appears after one second, dims the backdrop and can be dismissed", async ({
   page,
 }) => {
   await page.clock.install({ time: new Date("2026-10-16T00:00:00Z") });
@@ -522,7 +522,7 @@ test("hero video appears after three seconds, dims the backdrop and can be dismi
     exact: true,
   });
   await expect(video).toHaveCount(0);
-  await page.clock.runFor(2999);
+  await page.clock.runFor(999);
   await expect(video).toHaveCount(0);
   await page.clock.runFor(650);
   await expect(video).toBeVisible();
