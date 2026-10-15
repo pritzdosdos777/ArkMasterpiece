@@ -1,0 +1,58 @@
+# Ark Masterpiece
+
+A responsive Next.js App Router portfolio with TypeScript, Tailwind CSS, Motion, Lucide, and a data-driven gallery. No public deployment has been performed.
+
+## Development
+
+Requires Node.js 22+ and npm. Use the existing checkout; no worktree is necessary.
+
+```sh
+npm ci --cache /workspace/.npm-cache
+npm run dev
+```
+
+Run `npm run lint`, `npm run typecheck`, `npm run build`, and `npm test`. Browser tests use `/usr/bin/chromium`; set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` for another installation. After building, `npm start` serves production. Open the local server on port 3000 in a supported local development environment. Cloud onboarding has no public preview link.
+
+## Structure and content
+
+- `src/app`: Home, About, Services, Portfolio, Contact, metadata routes, server contact endpoint.
+- `src/components`: shared navigation, sections, reveal animation, gallery and form.
+- `src/data/content.ts`: contact information, social links, services, projects, verified testimonials.
+- `public/portfolio`: owner-approved original artwork.
+- `docs/MIGRATION.md`: migration status and asset handoff.
+
+### Add portfolio artwork
+
+1. Upload the original image under `public/portfolio/<category>/`. Suggested folders: book-covers, logos, social-media, email-marketing, product-designs, websites, videos.
+2. Add a project to `projects` in `src/data/content.ts`:
+
+```ts
+{ id: 'unique-id', title: 'Actual project title', category: 'Book Covers',
+  image: '/portfolio/book-covers/cover.jpg', alt: 'Describe the actual artwork',
+  width: 1600, height: 2400, description: 'Optional verified description' }
+```
+
+Use actual pixel dimensions and descriptive alt text. Images retain their proportions; no content is cropped. Only categories with real projects appear. Gallery buttons open the full image; Escape closes, arrow keys navigate, Tab stays in the dialog. Next Image creates optimized variants automatically. Do not put confidential or unlicensed work in public assets. Videos currently require a separate authorized hosted link or a future player integration; the current gallery supports images and video thumbnails only.
+
+Update `site.email` and `site.socials` with verified contact details. Proposed services need owner confirmation. Add only verified testimonials to the typed array; otherwise the section remains clearly marked as draft. The text wordmark is temporary, not a permanent logo. Fonts use a local system Georgia/Arial stack to avoid external font requests; licensed local font files can replace them later.
+
+## Contact delivery
+
+Copy `.env.example` to `.env.local` and configure server-only variables:
+
+- `RESEND_API_KEY`: Resend API credential.
+- `CONTACT_FROM_EMAIL`: verified sender on your Resend domain.
+- `CONTACT_TO_EMAIL`: business inbox.
+- `SITE_URL`: final canonical HTTPS origin, without a trailing slash.
+
+Never use `NEXT_PUBLIC_` for credentials. Configure secrets securely in your deployment settings. With no provider configured the API returns 503 and explicitly says nothing was sent. Invalid input returns 400; provider failure returns 502. A success is shown only when Resend accepts the send request, which does not guarantee inbox delivery. Before public launch enable provider/domain authentication and deployment-level rate limiting or bot protection. The endpoint validates request origin and field lengths; it does not store submissions.
+
+## Vercel preparation
+
+Import this GitHub feature branch into Vercel only after approval to deploy. Framework preset: Next.js; install: `npm ci`; build: `npm run build`; output: default. Add the server environment variables above. Set `SITE_URL` to the approved domain so sitemap generation uses a real origin. Without it, sitemap is empty rather than publishing an invented URL. Metadata titles/descriptions and Open Graph title/description are included. Add a real branded social image after receiving approved artwork.
+
+Before public launch: finish Wix migration, confirm services and copy, supply logo/portrait/contact links, add privacy information appropriate to the chosen delivery provider, test real email delivery, and review desktop/mobile views. Do not publish placeholder work as finished portfolio content.
+
+## Review / merge
+
+Branch: `feat/ark-masterpiece-website`. Review the commit diff, then push with `git push -u origin feat/ark-masterpiece-website` if not already pushed. Open a pull request against `main` with title “Build Ark Masterpiece portfolio website”; include `docs/MIGRATION.md` and validation results in the review. No paid services or deployment are authorized by this implementation.
