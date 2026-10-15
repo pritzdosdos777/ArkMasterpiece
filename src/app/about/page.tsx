@@ -17,7 +17,7 @@ export default function About() {
         <div className="portrait-frame">
           <Image
             src={portraits.about}
-            alt="Jean Monica smiling in her professional portrait"
+            alt="Jean Monica in a pink blazer, holding a tablet"
             width={portraits.aboutWidth}
             height={portraits.aboutHeight}
             sizes="(max-width: 700px) 88vw, 40vw"

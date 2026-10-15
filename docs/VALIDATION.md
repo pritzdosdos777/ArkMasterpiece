@@ -93,3 +93,9 @@ Production build, lint and TypeScript checks passed. All **6 targeted Playwright
 All 43 portfolio artwork cards now fade and slide in from the right on viewport entry. Full-gallery stagger delays reset in groups of three and are capped at 0.18 seconds, rather than accumulating across the full collection. Entrances replay when filters or the original/mockup view change. The fullscreen artwork uses a brief opacity transition when images or presentation modes change; only the artwork remounts, so the caption controls retain keyboard focus. Reduced-motion styles and the no-JavaScript visibility fallback cover all artwork cards. The full gallery clips horizontal animation overflow.
 
 Production build, lint and TypeScript passed. All **15 targeted Playwright tests passed**, including all five responsive widths, artwork loading, existing filter/lightbox interactions, all 43 completed scroll entrances, original-view/filter changes, keyboard focus in the fullscreen viewer, mobile reduced motion and video filter availability. Video decoding/playback tests were not rerun for this artwork-animation change. Public Vercel deployment remains unverified.
+
+## Updated About portrait
+
+The latest owner-provided Founder.zip contained BC45DD0D-16B8-4D98-88A7-B254519D0CBD.PNG (1132×1390). The About page now uses the optimized `public/brand/about.webp`, with accurate dimensions and alt text. The untouched source is retained at `public/brand/about-original.png` and its SHA-256 is recorded in `about-photo.json`. The homepage founder portrait remains separately configured.
+
+Production build, lint and TypeScript checks passed. All **6 targeted browser tests passed** (five responsive widths and image loading). About-page screenshots at 1440px and 375px were visually inspected; the complete portrait is visible without cropping. Unchanged video and animation suites were not rerun for this photo replacement. Public Vercel redeployment remains unverified.

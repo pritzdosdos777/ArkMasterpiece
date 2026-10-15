@@ -75,9 +75,9 @@ export const portraits = {
   studio: "/brand/founder.webp",
   studioWidth: 1254,
   studioHeight: 1254,
-  about: "/portfolio/brand/new-0cf372e9.webp",
-  aboutWidth: 1889,
-  aboutHeight: 2534,
+  about: "/brand/about.webp",
+  aboutWidth: 1132,
+  aboutHeight: 1390,
 };
 
 export const portfolioCategories = [
