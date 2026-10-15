@@ -65,3 +65,11 @@ export const portraits = {
   aboutWidth: 1889,
   aboutHeight: 2534,
 };
+
+export const portfolioCategories = [
+  { name: "Book Covers", slug: "book-covers" },
+  { name: "Designs & Logos", slug: "designs-logos" },
+  { name: "Social Media Graphics", slug: "social-media-graphics" },
+  { name: "Email Marketing Designs", slug: "email-marketing-designs" },
+  { name: "Product Designs", slug: "product-designs" },
+] as const;

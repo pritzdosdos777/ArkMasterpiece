@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, X, Expand } from "lucide-react";
-import { projects } from "@/data/content";
+import { projects, portfolioCategories, type Project } from "@/data/content";
 export function Gallery({ preview = false }: { preview?: boolean }) {
   const [category, setCategory] = useState("All Projects");
   const [active, setActive] = useState<number | null>(null);
@@ -17,10 +17,40 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
     .slice(0, preview ? 3 : undefined);
   const categories = [
     "All Projects",
-    ...new Set(projects.map((p) => p.category)),
+    ...portfolioCategories
+      .filter((c) => projects.some((p) => p.category === c.name))
+      .map((c) => c.name),
   ];
+  const isOpen = active !== null;
+  function projectCard(p: Project) {
+    return (
+      <button
+        className="project"
+        key={p.id}
+        onClick={(e) => {
+          trigger.current = e.currentTarget;
+          setActive(filtered.indexOf(p));
+        }}
+      >
+        <div className="project-image">
+          <Image
+            src={p.image}
+            alt={p.alt}
+            width={p.width}
+            height={p.height}
+            sizes="(max-width: 600px) 88vw, (max-width: 1000px) 44vw, 29vw"
+          />
+          <Expand className="expand" aria-hidden="true" />
+        </div>
+        <span className="project-caption">
+          <strong>{p.title}</strong>
+          {preview && <span>{p.category}</span>}
+        </span>
+      </button>
+    );
+  }
   useEffect(() => {
-    if (active === null) return;
+    if (!isOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     close.current?.focus();
@@ -55,7 +85,7 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
       document.removeEventListener("keydown", key);
       trigger.current?.focus();
     };
-  }, [active, filtered.length]);
+  }, [isOpen, filtered.length]);
   return (
     <>
       {!preview && projects.length > 0 && (
@@ -94,33 +124,38 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
             </span>
           </div>
         </div>
+      ) : preview ? (
+        <div className="gallery preview-gallery">
+          {filtered.map(projectCard)}
+        </div>
       ) : (
-        <div className={preview ? "gallery preview-gallery" : "gallery"}>
-          {filtered.map((p, i) => (
-            <button
-              className="project"
-              key={p.id}
-              onClick={(e) => {
-                trigger.current = e.currentTarget;
-                setActive(i);
-              }}
-            >
-              <div className="project-image">
-                <Image
-                  src={p.image}
-                  alt={p.alt}
-                  width={p.width}
-                  height={p.height}
-                  sizes="(max-width: 700px) 100vw, 50vw"
-                />
-                <Expand className="expand" />
-              </div>
-              <span className="project-caption">
-                <strong>{p.title}</strong>
-                <span>{p.category}</span>
-              </span>
-            </button>
-          ))}
+        <div className="portfolio-sections">
+          {portfolioCategories.map((group, index) => {
+            const members = filtered.filter((p) => p.category === group.name);
+            if (!members.length) return null;
+            return (
+              <section
+                className="portfolio-group"
+                key={group.slug}
+                aria-labelledby={group.slug + "-title"}
+              >
+                <div className="portfolio-group-heading">
+                  <div>
+                    <p className="eyebrow">
+                      {String(index + 1).padStart(2, "0")} / THE COLLECTION
+                    </p>
+                    <h2 id={group.slug + "-title"}>{group.name}</h2>
+                  </div>
+                  <span className="collection-count">
+                    {members.length} pieces
+                  </span>
+                </div>
+                <div className={"gallery category-grid " + group.slug}>
+                  {members.map(projectCard)}
+                </div>
+              </section>
+            );
+          })}
         </div>
       )}
       {active !== null && filtered[active] && (
@@ -154,7 +189,7 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
               height={filtered[active].height}
               sizes="90vw"
             />
-            <figcaption>
+            <figcaption aria-live="polite">
               {filtered[active].title} · {active + 1} / {filtered.length}
               {filtered[active].original && (
                 <a

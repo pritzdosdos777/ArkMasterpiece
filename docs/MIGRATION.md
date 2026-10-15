@@ -8,15 +8,14 @@ Access now succeeds. Downloaded **45 original files** from the publicly served W
 
 The portfolio now contains:
 
-| Category         |  Items |
-| ---------------- | -----: |
-| Book Covers      |      6 |
-| Logos & Branding |      4 |
-| Graphic Design   |      3 |
-| Social Media     |     21 |
-| Email Marketing  |      6 |
-| Product Design   |      3 |
-| **Total**        | **43** |
+| Category                |  Items |
+| ----------------------- | -----: |
+| Book Covers             |      6 |
+| Designs & Logos         |      7 |
+| Social Media Graphics   |     21 |
+| Email Marketing Designs |      6 |
+| Product Designs         |      3 |
+| **Total**               | **43** |
 
 The homepage features a book cover, an ad creative, and an apparel design. Its About preview uses the studio photo; the About page uses the second portrait. The pink and blue **Ark Designs** logos remain portfolio artwork. They are not presented as a replacement permanent logo for **Ark Masterpiece**.
 
@@ -46,3 +45,9 @@ If the two inaccessible assets or a showreel are wanted, supply the original fil
 ## Maintenance
 
 To update a gallery item, edit `src/data/projects.json`. `image` points to the optimized WebP; `original` points to the untouched source PNG/JPEG. Use actual pixel dimensions for the image being rendered. Set `featured: true` on exactly three items to control the homepage selection. Retain aspect ratios and use truthful descriptions. See README for more detail.
+
+## Gallery arrangement
+
+Collections now follow the exact five Wix section names and their order. Within each collection, artwork follows its source sequence. The additional pink Ark Designs logo from the source header is placed last in Designs & Logos. Each section has its own heading and item count. Balanced row grids replace the mixed masonry view; consistent frames use `object-fit: contain` and preserve all artwork. The category filter and lightbox remain available.
+
+The new gold-on-black Ark Masterpiece logo was shown inline in chat but has not been delivered to the execution workspace as a retrievable file. Installing that exact artwork remains pending a PNG/JPG attachment; it has not been recreated or replaced with a generated approximation.

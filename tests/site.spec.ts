@@ -67,10 +67,12 @@ test("migrated gallery filters original artwork and supports the lightbox", asyn
   await expect(dialog).toHaveCount(0);
   await expect(first).toBeFocused();
   await page
-    .getByRole("button", { name: "Email Marketing", exact: true })
+    .getByRole("button", { name: "Email Marketing Designs", exact: true })
     .click();
   await expect(page.locator(".project")).toHaveCount(6);
-  await page.getByRole("button", { name: "Social Media", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Social Media Graphics", exact: true })
+    .click();
   await expect(page.locator(".project")).toHaveCount(21);
   await expect(
     page.getByRole("button", { name: "Websites & Funnels", exact: true }),
@@ -116,4 +118,33 @@ test("homepage features three uncropped designs in one desktop row", async ({
     nodes.map((e) => e.getBoundingClientRect().top),
   );
   expect(Math.max(...tops) - Math.min(...tops)).toBeLessThan(2);
+});
+
+test("collections follow the Wix categories and artwork order", async ({
+  page,
+}) => {
+  await page.goto("/portfolio");
+  await expect(page.locator(".portfolio-group h2")).toHaveText([
+    "Book Covers",
+    "Designs & Logos",
+    "Social Media Graphics",
+    "Email Marketing Designs",
+    "Product Designs",
+  ]);
+  const groups = page.locator(".portfolio-group");
+  for (const [i, count] of [6, 7, 21, 6, 3].entries())
+    await expect(groups.nth(i).locator(".project")).toHaveCount(count);
+  await expect(groups.nth(0).locator(".project").first()).toContainText(
+    "Obedience",
+  );
+  await expect(groups.nth(1).locator(".project").first()).toContainText(
+    "Ahria’s Adventure",
+  );
+  await page
+    .getByRole("button", { name: "Designs & Logos", exact: true })
+    .click();
+  await expect(page.locator(".portfolio-group h2")).toHaveText([
+    "Designs & Logos",
+  ]);
+  await expect(page.locator(".project")).toHaveCount(7);
 });

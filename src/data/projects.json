@@ -1,15 +1,5 @@
 [
   {
-    "id": "wix-fb59991bc073",
-    "title": "Ark Designs — pink logo",
-    "category": "Logos & Branding",
-    "image": "/portfolio/brand/frame-owixpng-edited-edited-edited-5f527624.webp",
-    "original": "/portfolio/brand/frame-owixpng-edited-edited-edited-5f527624.png",
-    "alt": "Pink angular Ark Designs monogram and wordmark on a transparent background",
-    "width": 1104,
-    "height": 1104
-  },
-  {
     "id": "wix-1162a6de6116",
     "title": "Obedience — The Kingdom Culture",
     "category": "Book Covers",
@@ -73,7 +63,7 @@
   {
     "id": "wix-48192b6f518e",
     "title": "Ahria’s Adventure — logo",
-    "category": "Logos & Branding",
+    "category": "Designs & Logos",
     "image": "/portfolio/graphic-design/iphone-8-plus-4-d75cbabd.webp",
     "original": "/portfolio/graphic-design/iphone-8-plus-4-d75cbabd.png",
     "alt": "Ahria’s Adventure logo with an orange compass and black script",
@@ -83,7 +73,7 @@
   {
     "id": "wix-0f5aac542872",
     "title": "Freegen Church Ignite",
-    "category": "Graphic Design",
+    "category": "Designs & Logos",
     "image": "/portfolio/graphic-design/ignite-2-7dfb9694.webp",
     "original": "/portfolio/graphic-design/ignite-2-7dfb9694.png",
     "alt": "Black and gold Freegen Church Ignite graphic with a flame-shaped mark",
@@ -93,7 +83,7 @@
   {
     "id": "wix-c2884bc10f91",
     "title": "Dominoes",
-    "category": "Graphic Design",
+    "category": "Designs & Logos",
     "image": "/portfolio/graphic-design/dominoes-5c688847.webp",
     "original": "/portfolio/graphic-design/dominoes-5c688847.png",
     "alt": "Dominoes lettering in orange on a dark red graphic",
@@ -103,7 +93,7 @@
   {
     "id": "wix-3c642bb8e3ae",
     "title": "Ark Designs — blue logo",
-    "category": "Logos & Branding",
+    "category": "Designs & Logos",
     "image": "/portfolio/graphic-design/new-logo-47485329.webp",
     "original": "/portfolio/graphic-design/new-logo-47485329.png",
     "alt": "Blue Ark Designs logo with a stylized ark and letterforms",
@@ -113,7 +103,7 @@
   {
     "id": "wix-41cb9cae586e",
     "title": "Moses — Another Red Sea",
-    "category": "Graphic Design",
+    "category": "Designs & Logos",
     "image": "/portfolio/graphic-design/moses-3-1-1031eaa4.webp",
     "original": "/portfolio/graphic-design/moses-3-1-1031eaa4.png",
     "alt": "Blue Moses graphic with repeated title lettering and Another Red Sea subtitle",
@@ -123,7 +113,7 @@
   {
     "id": "wix-a68d32a77b7c",
     "title": "Worshipper — logo",
-    "category": "Logos & Branding",
+    "category": "Designs & Logos",
     "image": "/portfolio/graphic-design/worshipper-50bbcaa9.webp",
     "original": "/portfolio/graphic-design/worshipper-50bbcaa9.png",
     "alt": "Circular Worshipper logo with a gold wing-shaped W",
@@ -131,9 +121,19 @@
     "height": 1080
   },
   {
+    "id": "wix-fb59991bc073",
+    "title": "Ark Designs — pink logo",
+    "category": "Designs & Logos",
+    "image": "/portfolio/brand/frame-owixpng-edited-edited-edited-5f527624.webp",
+    "original": "/portfolio/brand/frame-owixpng-edited-edited-edited-5f527624.png",
+    "alt": "Pink angular Ark Designs monogram and wordmark on a transparent background",
+    "width": 1104,
+    "height": 1104
+  },
+  {
     "id": "wix-7d8f299209f9",
     "title": "Elite Spine — chiropractic adjustments story",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/elite-spine-houston-meta-creatives-3-dc1d373b.webp",
     "original": "/portfolio/social-media/elite-spine-houston-meta-creatives-3-dc1d373b.png",
     "alt": "Elite Spine vertical chiropractic advertisement with orange pricing badge",
@@ -143,7 +143,7 @@
   {
     "id": "wix-5097f46c4614",
     "title": "Elite Spine — chiropractic adjustments",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/elite-spine-houston-meta-creatives-2-2a18ca2e.webp",
     "original": "/portfolio/social-media/elite-spine-houston-meta-creatives-2-2a18ca2e.png",
     "alt": "Square Elite Spine chiropractic creative with a spine-treatment photograph",
@@ -154,7 +154,7 @@
   {
     "id": "wix-9d7b55bdee0a",
     "title": "Elite Spine — neuropathy relief",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/elite-spine-houston-meta-creatives-c9812659.webp",
     "original": "/portfolio/social-media/elite-spine-houston-meta-creatives-c9812659.png",
     "alt": "Elite Spine neuropathy relief creative with spine illustration",
@@ -164,7 +164,7 @@
   {
     "id": "wix-87291c619d41",
     "title": "Elite Spine — neuropathy campaign",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/elite-spine-houston-meta-creatives-1-faf347f5.webp",
     "original": "/portfolio/social-media/elite-spine-houston-meta-creatives-1-faf347f5.png",
     "alt": "Wide Elite Spine neuropathy campaign creative in orange and white",
@@ -174,7 +174,7 @@
   {
     "id": "wix-895faee4f091",
     "title": "Broadview — consistency campaign",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/broadview-january-f76b3873.webp",
     "original": "/portfolio/social-media/broadview-january-f76b3873.png",
     "alt": "Broadview consistency campaign with a treatment photograph and bold lettering",
@@ -184,7 +184,7 @@
   {
     "id": "wix-1f5b677d7ce0",
     "title": "Dr. Kate — a spine finally able to breathe",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/dr-kate-january-aa8e3238.webp",
     "original": "/portfolio/social-media/dr-kate-january-aa8e3238.png",
     "alt": "Dr. Kate creative featuring a treatment room and the headline A Spine Finally Able to Breathe",
@@ -194,7 +194,7 @@
   {
     "id": "wix-6efd62e15d57",
     "title": "Dr. Kate — nerve pain creative",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/dr-kate-december-a0cb9f1d.webp",
     "original": "/portfolio/social-media/dr-kate-december-a0cb9f1d.png",
     "alt": "Dr. Kate nerve-pain graphic with a glowing spine illustration",
@@ -204,7 +204,7 @@
   {
     "id": "wix-c926189f88b7",
     "title": "Revive — support your spine",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/november-revive-6b5c324d.webp",
     "original": "/portfolio/social-media/november-revive-6b5c324d.png",
     "alt": "Revive spine-support creative with treatment photography and blue typography",
@@ -214,7 +214,7 @@
   {
     "id": "wix-368ffe399c65",
     "title": "QuantumCore — IME services",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/quantumcore-december-23a0dc22.webp",
     "original": "/portfolio/social-media/quantumcore-december-23a0dc22.png",
     "alt": "QuantumCore IME services creative with a portrait and blue lettering",
@@ -224,7 +224,7 @@
   {
     "id": "wix-783efbdaad86",
     "title": "Blair Regenerative Medicine — disc disease creative",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/blair-regenerative-medicine-for-november-947d525c.webp",
     "original": "/portfolio/social-media/blair-regenerative-medicine-for-november-947d525c.png",
     "alt": "Blair Regenerative Medicine creative with a blue spine illustration",
@@ -234,7 +234,7 @@
   {
     "id": "wix-12165cee8b3a",
     "title": "Palmier TMS — overthinking",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/palmier-nov-1-6fb0f716.webp",
     "original": "/portfolio/social-media/palmier-nov-1-6fb0f716.png",
     "alt": "Purple Palmier TMS overthinking creative with a person resting their head",
@@ -244,7 +244,7 @@
   {
     "id": "wix-d5b3dd01ad23",
     "title": "Palmier TMS — hope has a frequency",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/palmier-nov-9ceff3af.webp",
     "original": "/portfolio/social-media/palmier-nov-9ceff3af.png",
     "alt": "Palmier TMS creative with a smiling portrait and purple and yellow lettering",
@@ -254,7 +254,7 @@
   {
     "id": "wix-fd9af0c23a59",
     "title": "LMG Artistry — body contouring",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/lmg-artistry-ece8e1ba.webp",
     "original": "/portfolio/social-media/lmg-artistry-ece8e1ba.png",
     "alt": "LMG Artistry body-contouring creative with pink and white layout",
@@ -264,7 +264,7 @@
   {
     "id": "wix-5bf612b984bf",
     "title": "LMG Artistry — muscle and skin care",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/lmg-artistry-2-f29dd9a9.webp",
     "original": "/portfolio/social-media/lmg-artistry-2-f29dd9a9.png",
     "alt": "LMG Artistry muscle and skin care creative in a tall pink and white layout",
@@ -274,7 +274,7 @@
   {
     "id": "wix-84806548bdd6",
     "title": "LMG Artistry — build muscle",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/social-media/lmg-artistry-1-962c7a45.webp",
     "original": "/portfolio/social-media/lmg-artistry-1-962c7a45.png",
     "alt": "LMG Artistry muscle-building creative with a fitness portrait",
@@ -284,7 +284,7 @@
   {
     "id": "wix-97bb424ce0cc",
     "title": "Soul Detox — let your mind be free",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/graphic-design/img-3319-7c822dec.webp",
     "original": "/portfolio/graphic-design/img-3319-7c822dec.jpg",
     "alt": "Soul Detox social graphic reading Let Your Mind Be Free in peach lettering",
@@ -294,7 +294,7 @@
   {
     "id": "wix-4f25ab4d940f",
     "title": "Soul Detox — God loves you",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/graphic-design/img-3330-0293f727.webp",
     "original": "/portfolio/graphic-design/img-3330-0293f727.jpg",
     "alt": "Soul Detox social graphic reading God Loves You in peach lettering",
@@ -304,7 +304,7 @@
   {
     "id": "wix-2cbd7730a815",
     "title": "Soul Detox — God cares for you",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/graphic-design/img-3331-b633e14f.webp",
     "original": "/portfolio/graphic-design/img-3331-b633e14f.jpg",
     "alt": "Soul Detox social graphic reading God Cares for You in peach lettering",
@@ -314,7 +314,7 @@
   {
     "id": "wix-602ccd624a3f",
     "title": "Soul Detox — keep moving forward",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/graphic-design/img-3340-be72add0.webp",
     "original": "/portfolio/graphic-design/img-3340-be72add0.jpg",
     "alt": "Soul Detox social graphic reading Keep Moving Forward with turquoise brush strokes",
@@ -324,7 +324,7 @@
   {
     "id": "wix-f486f49ac97a",
     "title": "Soul Detox — grow deeper",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/graphic-design/img-3368-36aa4aaf.webp",
     "original": "/portfolio/graphic-design/img-3368-36aa4aaf.jpg",
     "alt": "Soul Detox social graphic reading Grow Deeper in the Knowledge of Jesus Christ",
@@ -334,7 +334,7 @@
   {
     "id": "wix-8f3555fc7a7b",
     "title": "Soul Detox — do not be afraid",
-    "category": "Social Media",
+    "category": "Social Media Graphics",
     "image": "/portfolio/graphic-design/img-3341-32b7cee0.webp",
     "original": "/portfolio/graphic-design/img-3341-32b7cee0.jpg",
     "alt": "Soul Detox social graphic reading Do Not Be Afraid to Step Out with turquoise brush strokes",
@@ -344,7 +344,7 @@
   {
     "id": "wix-8125f6af8e4e",
     "title": "Annie & Lori — email design",
-    "category": "Email Marketing",
+    "category": "Email Marketing Designs",
     "image": "/portfolio/email-marketing/annie-and-lori-f2363fb3.webp",
     "original": "/portfolio/email-marketing/annie-and-lori-f2363fb3.png",
     "alt": "Full-length Annie and Lori email layout with footwear and lifestyle photography",
@@ -354,7 +354,7 @@
   {
     "id": "wix-b76533a04a8f",
     "title": "Bai Hotel — email design",
-    "category": "Email Marketing",
+    "category": "Email Marketing Designs",
     "image": "/portfolio/email-marketing/bai-hotel-b2a38c21.webp",
     "original": "/portfolio/email-marketing/bai-hotel-b2a38c21.png",
     "alt": "Full-length Bai Hotel Weekender email design with blue sections",
@@ -364,7 +364,7 @@
   {
     "id": "wix-99c686336ab5",
     "title": "Tiffany & Co. — email design",
-    "category": "Email Marketing",
+    "category": "Email Marketing Designs",
     "image": "/portfolio/email-marketing/tiffany-co-ee5456a7.webp",
     "original": "/portfolio/email-marketing/tiffany-co-ee5456a7.png",
     "alt": "Full-length Tiffany and Co email design with turquoise jewelry sections",
@@ -374,7 +374,7 @@
   {
     "id": "wix-e1462eee363e",
     "title": "Chingolo — email design",
-    "category": "Email Marketing",
+    "category": "Email Marketing Designs",
     "image": "/portfolio/email-marketing/chingolo-4f81b8c9.webp",
     "original": "/portfolio/email-marketing/chingolo-4f81b8c9.png",
     "alt": "Full-length Chingolo email design with food photography and red sections",
@@ -384,7 +384,7 @@
   {
     "id": "wix-9e6b9d9c1275",
     "title": "MG — email design",
-    "category": "Email Marketing",
+    "category": "Email Marketing Designs",
     "image": "/portfolio/email-marketing/mg-fba49692.webp",
     "original": "/portfolio/email-marketing/mg-fba49692.png",
     "alt": "Full-length MG automotive email design in red, white and black",
@@ -394,7 +394,7 @@
   {
     "id": "wix-6883809d2f21",
     "title": "BLK — email design",
-    "category": "Email Marketing",
+    "category": "Email Marketing Designs",
     "image": "/portfolio/email-marketing/blk-eb4a6233.webp",
     "original": "/portfolio/email-marketing/blk-eb4a6233.png",
     "alt": "Full-length BLK cosmetics email design with pink and yellow sections",
@@ -404,7 +404,7 @@
   {
     "id": "wix-e290b3cb34c7",
     "title": "Woman of Wonder — apparel mockup",
-    "category": "Product Design",
+    "category": "Product Designs",
     "image": "/portfolio/product-designs/frame-20-4a331c22.webp",
     "original": "/portfolio/product-designs/frame-20-4a331c22.png",
     "alt": "Woman of Wonder apparel presentation with white T-shirt on a hanger and pink background",
@@ -415,7 +415,7 @@
   {
     "id": "wix-fcf277d213a7",
     "title": "Woman of Wonder — shirt design",
-    "category": "Product Design",
+    "category": "Product Designs",
     "image": "/portfolio/product-designs/frame-21-747fa61f.webp",
     "original": "/portfolio/product-designs/frame-21-747fa61f.png",
     "alt": "Woman of Wonder shirt mockup with pink lettering on a white T-shirt",
@@ -425,7 +425,7 @@
   {
     "id": "wix-2f35e82ec2a6",
     "title": "Woman of Wonder — front and back",
-    "category": "Product Design",
+    "category": "Product Designs",
     "image": "/portfolio/product-designs/frame-19-7b867a3e.webp",
     "original": "/portfolio/product-designs/frame-19-7b867a3e.png",
     "alt": "Woman of Wonder front-and-back white T-shirt mockup on a pink background",
