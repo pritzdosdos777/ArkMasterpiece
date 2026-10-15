@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, X, Expand } from "lucide-react";
 import { projects, portfolioCategories, type Project } from "@/data/content";
 import { Mockup } from "./mockup";
+import { VideoPortfolio } from "./video-portfolio";
+import videoProjects from "@/data/videos.json";
 import { mockupKind, mockupLabels } from "@/data/mockups";
 export function Gallery({ preview = false }: { preview?: boolean }) {
+  const reduced = useReducedMotion();
   const [view, setView] = useState<"mockups" | "originals">("mockups");
   const [dialogView, setDialogView] = useState<"mockups" | "originals">(
     "mockups",
@@ -26,12 +30,21 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
     ...portfolioCategories
       .filter((c) => projects.some((p) => p.category === c.name))
       .map((c) => c.name),
+    ...(videoProjects.some((video) => video.src) ? ["Video Editing"] : []),
   ];
   const isOpen = active !== null;
   function projectCard(p: Project) {
     return (
-      <button
-        className="project"
+      <motion.button
+        className={preview ? "project featured-card" : "project"}
+        initial={preview && !reduced ? { opacity: 0, x: 36 } : false}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{
+          duration: reduced ? 0 : 0.55,
+          delay: preview && !reduced ? filtered.indexOf(p) * 0.09 : 0,
+          ease: "easeOut",
+        }}
         data-project-id={p.id}
         key={p.id}
         onClick={(e) => {
@@ -67,7 +80,7 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
             <span className="mockup-label">{mockupLabels[mockupKind(p)]}</span>
           )}
         </span>
-      </button>
+      </motion.button>
     );
   }
   useEffect(() => {
@@ -109,7 +122,7 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
   }, [isOpen, filtered.length]);
   return (
     <>
-      {!preview && (
+      {!preview && category !== "Video Editing" && (
         <div className="portfolio-view-controls">
           <p>
             Explore the artwork in styled presentation mockups, or switch to the
@@ -206,6 +219,10 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
           })}
         </div>
       )}
+      {!preview &&
+        (category === "All Projects" || category === "Video Editing") && (
+          <VideoPortfolio />
+        )}
       {active !== null && filtered[active] && (
         <div
           className="lightbox"

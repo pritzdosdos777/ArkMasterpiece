@@ -67,3 +67,17 @@ Production build, ESLint and TypeScript checks passed. All **20 Playwright tests
 Public Vercel deployment remains unverified from this environment. Git push alone does not establish that Vercel finished rebuilding.
 
 The completed video section was visually inspected in 1440px desktop and 375px mobile screenshots. The three-column desktop gallery and single-column mobile gallery show actual poster frames with preserved portrait proportions.
+
+## Contact navigation, service catalog, motion and video filter
+
+“Let’s work together” links in the header, hero and shared CTA now navigate to `/contact` in the current tab. Service inquiry links also reach Contact; the email address and email icon retain Gmail compose links. Social Media Management has been removed from the shared catalog, homepage/full service cards, form options and API whitelist. Existing social-media artwork remains in the portfolio. The homepage now shows five service previews and the Services page shows seven services.
+
+The incoming page uses a short template-based fade/slide transition. Scroll reveals now fade and rise gently; the six homepage featured images enter from the right with staggered delays. Reduced-motion styles remove movement and keep content visible, and no-JavaScript styles make reveal content visible. The featured section clips animation overflow.
+
+Removed the standalone “Explore video editing” jump link. Video Editing is a button in the main portfolio filter row. All Projects displays the 43 artworks plus seven videos; Video Editing displays only videos, and image categories exclude videos. The existing poster frames and playback controls remain intact.
+
+Production build, lint and TypeScript checks passed. All **24 Playwright tests passed**, including five viewport widths, Contact navigation, Gmail email links, removed-service API rejection, motion/reduced-motion behavior, video filter switching, all seven video playback/seek checks at desktop/mobile widths, fullscreen, and the existing artwork interactions.
+
+The new founder image is visible only as an inline chat image and has no downloadable attachment ID or local source file available to this environment. The current portrait remains unchanged. Replacement requires the exact JPG/PNG file; no generated portrait substitute has been created. Public Vercel deployment remains unverified.
+
+The integrated Video Editing filter was visually reviewed at 1440px and 375px, alongside featured-work screenshots after the entrance animations completed.

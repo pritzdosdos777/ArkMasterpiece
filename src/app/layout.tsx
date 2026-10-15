@@ -20,6 +20,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <noscript>
+          <style>{`.scroll-reveal,.featured-card{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <a className="skip" href="#main">
           Skip to content
         </a>

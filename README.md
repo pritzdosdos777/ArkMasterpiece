@@ -82,7 +82,7 @@ The current design follows the owner-supplied reference: a dark editorial hero, 
 
 `public/brand/studio-desk.webp` is a generated decorative studio scene, not client work or a real business premises. The actual portfolio and founder photos remain original Wix imports. The supplied gold logo is now displayed in the shared header and footer. `public/brand/ark-masterpiece-logo.webp` is an image-tool-prepared version of the inline attachment, not a byte-identical original upload or vector master. The full prepared mark and wordmark are included in the downloadable collection; the header/footer display its mark beside accessible typography.
 
-The email address and Facebook, Instagram and LinkedIn links in `site` come from the public Wix contact/About sections. All “Let’s work together” buttons, the footer email icon and the visible email address open Gmail web compose in a new tab, addressed to `site.email`. The shared `gmailComposeUrl` derives from that address. Gmail may ask visitors to sign in. The Contact navigation item still opens the contact page. Form delivery still requires configuration; visitors can use the published business email directly. Unverified testimonials are omitted from the homepage.
+The email address and Facebook, Instagram and LinkedIn links in `site` come from the public Wix contact/About sections. All “Let’s work together” buttons open `/contact` in the current tab. The footer email icon and the visible email address open Gmail web compose in a new tab, addressed to `site.email`. The shared `gmailComposeUrl` derives from that address. Gmail may ask visitors to sign in. The Contact navigation item still opens the contact page. Form delivery still requires configuration; visitors can use the published business email directly. Unverified testimonials are omitted from the homepage.
 
 ## Portfolio mockup presentations
 
@@ -105,10 +105,19 @@ Run `node scripts/package-mockups.mjs` to build `downloads/Ark-Masterpiece-Mocku
 
 ## Video editing additions
 
-The portfolio has a separate **Video Editing** section and jump link. `src/data/videos.json` contains the seven latest owner-provided videos, served as H.264/AAC MP4s from `public/portfolio/videos/`. All have fast-start metadata, portrait framing, their complete duration, and posters extracted from the footage at two seconds. The original uploads remain in the attachment workspace; only optimized playback copies are committed. `docs/video-manifest.json` records source/output hashes, file sizes, codecs and conversion settings.
+**Video Editing** appears beside the other portfolio filters. “All Projects” includes all artwork and the seven videos; choosing “Video Editing” shows just videos. The former standalone jump link has been removed. `src/data/videos.json` contains the seven latest owner-provided videos, served as H.264/AAC MP4s from `public/portfolio/videos/`. All have fast-start metadata, portrait framing, their complete duration, and posters extracted from the footage at two seconds. The original uploads remain in the attachment workspace; only optimized playback copies are committed. `docs/video-manifest.json` records source/output hashes, file sizes, codecs and conversion settings.
 
 To add an item, upload an optimized MP4 to `public/portfolio/videos/`, extract a real frame for `poster`, and add an entry with `id`, `title`, `src`, `poster`, `width`, `height` and `durationSeconds`. Preserve the original file name in `originalFilename`. Optionally set `captions` to an accurate WebVTT file; do not invent transcripts. `captions: null` indicates no separate caption track was supplied. Large source masters should stay outside Git; use optimized web copies or suitable media hosting.
 
 The native player provides sound, seeking and fullscreen controls, inline mobile playback, `preload="none"`, no autoplay, a direct-open fallback link and a load-error message. Starting a clip pauses other clips. Portrait videos retain their aspect ratio without cropping. The three/two/one-column grid adapts to desktop/tablet/mobile.
 
 The first eight attachments exceeded the transfer limit; the latest seven accessible submissions replace their pending cards. Earlier unreceived files are recorded in `docs/VIDEO-ADDITIONS.md` and are not represented as available videos.
+
+
+## Navigation and motion
+
+The primary CTA routes to Contact. Social Media Management has been removed from the shared service catalog (including the form and API whitelist); social graphics remain in the artwork portfolio. The homepage now has five service previews and the full page has seven services.
+
+`src/app/template.tsx` applies a short page-entry transition on navigation without delaying links. `Reveal` supplies scroll-triggered fades, and the six featured cards enter from the right with increasing delays. These animations run once per mount, use only opacity/transforms, and respect `prefers-reduced-motion`. A no-JavaScript style keeps reveal content visible. Existing original-artwork and video interactions are retained.
+
+The requested new inline founder portrait could not be retrieved as an image file. The existing portrait remains until the exact JPG/PNG is attached; do not create a generated substitute. The homepage founder image is configured through `portraits.studio`, `studioWidth` and `studioHeight` in `src/data/content.ts`.

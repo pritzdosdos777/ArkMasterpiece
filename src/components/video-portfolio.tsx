@@ -81,7 +81,7 @@ export function VideoPortfolio() {
   const available = videos.filter((video) => video.src);
   return (
     <section
-      className="section video-portfolio"
+      className="video-portfolio"
       id="video-editing"
       aria-labelledby="video-heading"
     >

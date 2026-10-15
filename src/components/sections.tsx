@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Camera,
   PenTool,
   Clapperboard,
   PanelsTopLeft,
@@ -14,7 +13,6 @@ import { Brand } from "./brand";
 import { services, site, gmailComposeUrl } from "@/data/content";
 const serviceIcons = [
   Handshake,
-  Camera,
   PenTool,
   PanelsTopLeft,
   Clapperboard,
@@ -24,7 +22,6 @@ const serviceIcons = [
 ];
 const serviceIds = [
   "virtual-assistance",
-  "social-media",
   "graphic-design",
   "digital-marketing",
   "video-content",
@@ -50,7 +47,7 @@ export function Intro({
   );
 }
 export function Services({ compact = false }: { compact?: boolean }) {
-  const indices = compact ? [1, 2, 4, 5, 6, 0] : services.map((_, i) => i);
+  const indices = compact ? [1, 3, 4, 5, 0] : services.map((_, i) => i);
   return (
     <div
       className={compact ? "services-grid compact-services" : "services-grid"}
@@ -72,10 +69,8 @@ export function Services({ compact = false }: { compact?: boolean }) {
                 </span>
               )}
               <Link
-                href={compact ? "/services#" + serviceIds[i] : gmailComposeUrl}
+                href={compact ? "/services#" + serviceIds[i] : "/contact"}
                 className="service-arrow"
-                target={compact ? undefined : "_blank"}
-                rel={compact ? undefined : "noopener noreferrer"}
                 aria-label={
                   compact ? "Explore " + name : "Enquire about " + name
                 }
@@ -109,14 +104,9 @@ export function CTA() {
           VA,
           <br className="desktop-break" /> Ark Masterpiece is here to help.
         </p>
-        <a
-          className="button"
-          href={gmailComposeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link className="button" href="/contact">
           Let’s work together <Arrow />
-        </a>
+        </Link>
       </div>
     </section>
   );

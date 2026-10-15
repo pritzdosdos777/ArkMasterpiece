@@ -379,7 +379,7 @@ header nav .nav-cta:hover {
   background: #e6cdb1;
 }
 .compact-services {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0;
   margin-top: 38px;
 }
@@ -2095,6 +2095,8 @@ textarea {
 }
 
 .video-portfolio {
+  margin-top: 64px;
+  padding-top: 48px;
   border-top: 1px solid var(--line, #d8c6ae);
   scroll-margin-top: 110px;
 }
@@ -2146,12 +2148,7 @@ textarea {
   color: #755c43;
   font-size: 12px;
 }
-.video-jump {
-  display: inline-block;
-  margin-bottom: 24px;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
+
 @media (max-width: 600px) {
   .video-grid {
     grid-template-columns: 1fr;
@@ -2165,5 +2162,31 @@ textarea {
 @media (min-width: 601px) and (max-width: 1000px) {
   .video-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.page-transition {
+  animation: page-enter 420ms ease-out both;
+}
+@keyframes page-enter {
+  from {
+    opacity: 0.5;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.featured-work {
+  overflow: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition,
+  .scroll-reveal,
+  .featured-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }

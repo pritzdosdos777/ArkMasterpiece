@@ -2,7 +2,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { gmailComposeUrl } from "@/data/content";
 import { Brand } from "./brand";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
@@ -10,10 +9,11 @@ export function Reveal({ children }: { children: React.ReactNode }) {
   const reduced = useReducedMotion();
   return (
     <motion.div
-      initial={reduced ? false : { opacity: 1, y: 12 }}
+      className="scroll-reveal"
+      initial={reduced ? false : { opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: reduced ? 0 : 0.55, ease: "easeOut" }}
     >
       {children}
     </motion.div>
@@ -53,15 +53,13 @@ export function Header() {
             {n}
           </Link>
         ))}
-        <a
+        <Link
           onClick={() => setOpen(false)}
           className="nav-cta"
-          href={gmailComposeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/contact"
         >
           Let’s work together <ArrowUpRight size={15} />
-        </a>
+        </Link>
       </nav>
     </header>
   );

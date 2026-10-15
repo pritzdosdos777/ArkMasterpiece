@@ -163,46 +163,36 @@ test("collections follow the Wix categories and artwork order", async ({
   await expect(page.locator(".project")).toHaveCount(7);
 });
 
-test("Gmail calls to action and service navigation work", async ({ page }) => {
+test("contact CTAs, Gmail email links and service navigation work", async ({
+  page,
+}) => {
   await page.goto("/");
-  await expect(page.locator(".hero h1")).toContainText("Creative Partner");
-  await expect(page.locator(".compact-services .service")).toHaveCount(6);
-  await expect(page.locator(".process li")).toHaveCount(4);
-  await page.context().route("https://mail.google.com/**", (route) =>
-    route.fulfill({
-      contentType: "text/html",
-      body: "<title>Gmail compose test</title>",
-    }),
-  );
-  const popupPromise = page.waitForEvent("popup");
+  await expect(page.locator(".compact-services .service")).toHaveCount(5);
   await page
     .locator(".hero")
     .getByRole("link", { name: "Let’s work together" })
     .click();
-  const popup = await popupPromise;
-  await popup.waitForLoadState();
-  const compose = new URL(popup.url());
-  expect(compose.origin).toBe("https://mail.google.com");
-  expect(compose.searchParams.get("to")).toBe("jeanmonicarche@gmail.com");
-  expect(compose.searchParams.get("view")).toBe("cm");
-  await popup.close();
+  await expect(page).toHaveURL(/\/contact$/);
   for (const path of ["/", "/about", "/services", "/portfolio", "/contact"]) {
     await page.goto(path);
-    for (const link of await page.locator('a[href*="mail.google.com"]').all()) {
-      const url = new URL((await link.getAttribute("href"))!);
-      expect(url.searchParams.get("to")).toBe("jeanmonicarche@gmail.com");
-      expect(url.searchParams.get("view")).toBe("cm");
-      await expect(link).toHaveAttribute("target", "_blank");
+    for (const link of await page
+      .getByRole("link", { name: "Let’s work together", exact: true })
+      .all()) {
+      await expect(link).toHaveAttribute("href", "/contact");
+      await expect(link).not.toHaveAttribute("target", "_blank");
     }
-    await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
-    await expect(page.locator(".nav-cta")).toHaveText("Let’s work together");
+    const email = page.getByRole("link", { name: "Email Jean Monica" });
+    const compose = new URL((await email.getAttribute("href"))!);
+    expect(compose.origin).toBe("https://mail.google.com");
+    expect(compose.searchParams.get("to")).toBe("jeanmonicarche@gmail.com");
+    await expect(page.locator(".nav-cta")).toHaveAttribute("href", "/contact");
   }
   await page.goto("/");
   await page
-    .getByRole("link", { name: "Explore Social Media Management" })
+    .getByRole("link", { name: "Explore Graphic Design & Branding" })
     .click();
-  await expect(page).toHaveURL(/services#social-media$/);
-  await expect(page.locator("#social-media")).toBeInViewport();
+  await expect(page).toHaveURL(/services#graphic-design$/);
+  await expect(page.locator("#graphic-design")).toBeInViewport();
 });
 
 test("gold logo loads in header and footer", async ({ page }) => {
@@ -252,7 +242,14 @@ test("video section contains seven ready videos with real posters", async ({
   request,
 }) => {
   await page.goto("/portfolio");
-  await page.getByRole("link", { name: "Explore video editing ↓" }).click();
+  await expect(
+    page.getByRole("link", { name: "Explore video editing ↓" }),
+  ).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Video Editing", exact: true })
+    .click();
+  await page.locator("#video-heading").scrollIntoViewIfNeeded();
+  await expect(page.locator(".project")).toHaveCount(0);
   await expect(page.locator("#video-heading")).toBeInViewport();
   await expect(page.locator(".video-card")).toHaveCount(7);
   await expect(page.locator(".video-pending")).toHaveCount(0);
@@ -366,4 +363,87 @@ test("video fullscreen opens and closes", async ({ page }) => {
   await expect
     .poll(() => page.evaluate(() => document.fullscreenElement === null))
     .toBe(true);
+});
+
+test("Social Media Management is removed from services, form and API", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/services");
+  await expect(page.locator(".service")).toHaveCount(7);
+  await expect(
+    page.getByRole("heading", { name: "Social Media Management", exact: true }),
+  ).toHaveCount(0);
+  await page.goto("/contact");
+  await expect(
+    page
+      .getByLabel("Service you’re interested in")
+      .locator("option", { hasText: "Social Media Management" }),
+  ).toHaveCount(0);
+  const response = await request.post("/api/contact", {
+    data: {
+      name: "Example Visitor",
+      email: "visitor@example.com",
+      service: "Social Media Management",
+      message: "A sample project inquiry with enough detail for validation.",
+    },
+  });
+  expect(response.status()).toBe(400);
+});
+
+for (const reduced of [false, true]) {
+  test(`featured entrances and page transitions with reduced motion ${reduced}`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({
+      reducedMotion: reduced ? "reduce" : "no-preference",
+    });
+    await page.goto("/");
+    const cards = page.locator(".featured-card");
+    await expect(cards).toHaveCount(6);
+    await cards.first().scrollIntoViewIfNeeded();
+    for (const card of await cards.all()) {
+      await card.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          card.evaluate((node) => Number(getComputedStyle(node).opacity)),
+        )
+        .toBe(1);
+      await expect
+        .poll(() => card.evaluate((node) => getComputedStyle(node).transform))
+        .toBe("none");
+    }
+    await page
+      .getByRole("navigation", { name: "Main navigation" })
+      .getByRole("link", { name: "About", exact: true })
+      .click();
+    await expect(page).toHaveURL(/\/about$/);
+    await expect(page.locator(".page-transition")).toHaveCount(1);
+    const animation = await page
+      .locator(".page-transition")
+      .evaluate((node) => getComputedStyle(node).animationName);
+    expect(animation).toBe(reduced ? "none" : "page-enter");
+  });
+}
+
+test("video editing shares the portfolio filters and All Projects", async ({
+  page,
+}) => {
+  await page.goto("/portfolio");
+  const filter = page.getByRole("button", {
+    name: "Video Editing",
+    exact: true,
+  });
+  await expect(page.locator(".filters")).toContainText("Video Editing");
+  await expect(page.locator(".video-card video")).toHaveCount(7);
+  await filter.click();
+  await expect(filter).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator(".video-card video")).toHaveCount(7);
+  await expect(page.locator(".project")).toHaveCount(0);
+  await page.getByRole("button", { name: "Book Covers", exact: true }).click();
+  await expect(page.locator(".video-card video")).toHaveCount(0);
+  await expect(page.locator(".project")).toHaveCount(6);
+  await page.getByRole("button", { name: "All Projects", exact: true }).click();
+  await expect(page.locator(".project")).toHaveCount(43);
+  await expect(page.locator(".video-card video")).toHaveCount(7);
 });

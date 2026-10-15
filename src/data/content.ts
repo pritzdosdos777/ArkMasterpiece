@@ -23,10 +23,6 @@ export const services = [
     "Make room for the work only you can do. Thoughtful support for your everyday digital tasks.",
   ],
   [
-    "Social Media Management",
-    "Bring consistency to your online presence with content planning and community support.",
-  ],
-  [
     "Graphic Design & Branding",
     "Turn your ideas into considered visuals, from brand essentials to campaign graphics.",
   ],
