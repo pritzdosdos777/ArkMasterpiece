@@ -447,3 +447,67 @@ test("video editing shares the portfolio filters and All Projects", async ({
   await expect(page.locator(".project")).toHaveCount(43);
   await expect(page.locator(".video-card video")).toHaveCount(7);
 });
+
+test("every portfolio image reveals on scroll and remains usable after filtering", async ({
+  page,
+}) => {
+  test.setTimeout(90000);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/portfolio");
+  const cards = page.locator(".portfolio-sections .portfolio-card");
+  await expect(cards).toHaveCount(43);
+  for (const card of await cards.all()) {
+    await card.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        card.evaluate((node) => Number(getComputedStyle(node).opacity)),
+      )
+      .toBe(1);
+    await expect
+      .poll(() => card.evaluate((node) => getComputedStyle(node).transform))
+      .toBe("none");
+  }
+  await page
+    .getByRole("button", { name: "Original artwork", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Book Covers", exact: true }).click();
+  await expect(cards).toHaveCount(6);
+  await cards.first().click();
+  const dialog = page.getByRole("dialog");
+  const toggle = dialog.getByRole("button", {
+    name: "Show mockup presentation",
+    exact: true,
+  });
+  await toggle.click();
+  await expect(
+    dialog.getByRole("button", { name: "Show original artwork", exact: true }),
+  ).toBeFocused();
+  await expect
+    .poll(() =>
+      dialog
+        .locator(".lightbox-artwork")
+        .evaluate((node) => Number(getComputedStyle(node).opacity)),
+    )
+    .toBe(1);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+});
+
+test("all portfolio images stay visible without motion on mobile", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto("/portfolio");
+  const cards = page.locator(".portfolio-sections .portfolio-card");
+  await expect(cards).toHaveCount(43);
+  expect(
+    await cards.evaluateAll((nodes) =>
+      nodes.every(
+        (node) =>
+          getComputedStyle(node).opacity === "1" &&
+          getComputedStyle(node).transform === "none",
+      ),
+    ),
+  ).toBe(true);
+});

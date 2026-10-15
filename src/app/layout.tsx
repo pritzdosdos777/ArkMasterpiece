@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <noscript>
-          <style>{`.scroll-reveal,.featured-card{opacity:1!important;transform:none!important}`}</style>
+          <style>{`.scroll-reveal,.portfolio-card{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <a className="skip" href="#main">
           Skip to content

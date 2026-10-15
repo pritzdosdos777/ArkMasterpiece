@@ -36,17 +36,27 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
   function projectCard(p: Project) {
     return (
       <motion.button
-        className={preview ? "project featured-card" : "project"}
-        initial={preview && !reduced ? { opacity: 0, x: 36 } : false}
+        className={
+          preview
+            ? "project portfolio-card featured-card"
+            : "project portfolio-card"
+        }
+        initial={!reduced ? { opacity: 0, x: preview ? 36 : 24 } : false}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{
           duration: reduced ? 0 : 0.55,
-          delay: preview && !reduced ? filtered.indexOf(p) * 0.09 : 0,
+          delay: reduced
+            ? 0
+            : (preview
+                ? filtered.indexOf(p)
+                : projects
+                    .filter((item) => item.category === p.category)
+                    .indexOf(p) % 3) * 0.09,
           ease: "easeOut",
         }}
         data-project-id={p.id}
-        key={p.id}
+        key={`${p.id}-${category}-${view}`}
         onClick={(e) => {
           trigger.current = e.currentTarget;
           setDialogView(view);
@@ -247,17 +257,25 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
             <ArrowLeft />
           </button>
           <figure>
-            {dialogView === "mockups" ? (
-              <Mockup project={filtered[active]} large />
-            ) : (
-              <Image
-                src={filtered[active].image}
-                alt={filtered[active].alt}
-                width={filtered[active].width}
-                height={filtered[active].height}
-                sizes="90vw"
-              />
-            )}
+            <motion.div
+              className="lightbox-artwork"
+              key={`${filtered[active].id}-${dialogView}`}
+              initial={reduced ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: reduced ? 0 : 0.2 }}
+            >
+              {dialogView === "mockups" ? (
+                <Mockup project={filtered[active]} large />
+              ) : (
+                <Image
+                  src={filtered[active].image}
+                  alt={filtered[active].alt}
+                  width={filtered[active].width}
+                  height={filtered[active].height}
+                  sizes="90vw"
+                />
+              )}
+            </motion.div>
             <figcaption aria-live="polite">
               {filtered[active].title} · {active + 1} / {filtered.length}
               {dialogView === "mockups" && (

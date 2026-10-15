@@ -2184,7 +2184,8 @@ textarea {
 @media (prefers-reduced-motion: reduce) {
   .page-transition,
   .scroll-reveal,
-  .featured-card {
+  .portfolio-card,
+  .lightbox-artwork {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
@@ -2203,4 +2204,8 @@ textarea {
   max-height: none;
   object-fit: contain;
   transform: none;
+}
+
+.portfolio-sections {
+  overflow: clip;
 }
