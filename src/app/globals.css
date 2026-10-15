@@ -769,7 +769,11 @@ textarea {
 
 /* Original portfolio artwork keeps its complete composition. */
 .preview-gallery {
-  columns: 3;
+  columns: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 30px;
 }
 .preview-gallery .project {
   display: inline-block;
@@ -796,7 +800,7 @@ textarea {
 }
 @media (max-width: 700px) {
   .preview-gallery {
-    columns: 1;
+    grid-template-columns: 1fr;
   }
   .portrait-frame {
     padding: 16px;

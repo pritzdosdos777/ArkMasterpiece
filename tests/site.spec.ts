@@ -104,3 +104,16 @@ test("all migrated artwork and portraits load", async ({ page }) => {
       .toBeGreaterThan(0);
   }
 });
+
+test("homepage features three uncropped designs in one desktop row", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+  const cards = page.locator(".preview-gallery .project");
+  await expect(cards).toHaveCount(3);
+  const tops = await cards.evaluateAll((nodes) =>
+    nodes.map((e) => e.getBoundingClientRect().top),
+  );
+  expect(Math.max(...tops) - Math.min(...tops)).toBeLessThan(2);
+});
