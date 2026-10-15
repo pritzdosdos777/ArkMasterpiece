@@ -7,6 +7,7 @@ const projects = JSON.parse(
   await fs.readFile(path.join(root, "src/data/projects.json"), "utf8"),
 );
 const exportRoot = path.join(root, ".mockup-exports");
+await fs.rm(exportRoot, { recursive: true, force: true });
 await fs.mkdir(exportRoot, { recursive: true });
 for (const project of projects) {
   if (!project.mockup) throw Error("Render every mockup before packaging.");
@@ -17,8 +18,8 @@ for (const project of projects) {
     .replace(/[^a-zA-Z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
   await sharp(path.join(root, "public" + project.mockup.src))
-    .png()
-    .toFile(path.join(folder, name + ".png"));
+    .webp({ quality: 95 })
+    .toFile(path.join(folder, name + ".webp"));
 }
 await fs.mkdir(path.join(exportRoot, "Brand Logo"), { recursive: true });
 await sharp(path.join(root, "public/brand/ark-masterpiece-logo.webp"))
@@ -26,7 +27,7 @@ await sharp(path.join(root, "public/brand/ark-masterpiece-logo.webp"))
   .toFile(path.join(exportRoot, "Brand Logo/Ark-Masterpiece-prepared.png"));
 await fs.writeFile(
   path.join(exportRoot, "START HERE.txt"),
-  "ARK MASTERPIECE — MOCKUP COLLECTION\n\n43 portfolio presentation images, organized like the Wix portfolio, plus a prepared version of the supplied gold logo. Open any PNG to view it.\n\nThese are concept presentations using the original artwork on illustrative books, signs, frames, and devices. They do not establish actual print production, store installation, live social posts or campaign performance. Six featured presentations use image-tool-generated photographic scenes based on the supplied artwork; fine print and material details are illustrative. The other 37 retain the rendered studio scenes. The original artwork is preserved separately on the website and remains the authoritative source for design details. The apparel designs already contained garment mockups and are presented as concept displays.\n\nThe logo asset was prepared from the inline chat attachment with the image tool. It is not the original uploaded PNG or a vector master.\n",
+  "ARK MASTERPIECE — MOCKUP COLLECTION\n\n43 photographic portfolio concept images in WebP format, organized like the Wix portfolio, plus a prepared PNG version of the supplied gold logo. Open any image to view it.\n\nAll 43 presentations use image-tool-generated photographic scenes based on the supplied artwork. These are illustrative concepts, not actual client product shoots, store installations, live social posts or evidence of campaign performance. Fine lettering and material details may vary. The untouched original artwork remains available separately on the website and is authoritative for exact design details.\n\nThe logo asset was prepared from the inline chat attachment with the image tool. It is not the original uploaded PNG or a vector master.\n",
 );
 const output = path.join(
   root,
@@ -40,5 +41,5 @@ execFileSync("python3", [
   output,
 ]);
 console.log(
-  "Packaged 43 mockup PNGs, a prepared logo and opening instructions.",
+  "Packaged 43 photographic mockup WebPs, a prepared logo and opening instructions.",
 );

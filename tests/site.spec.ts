@@ -47,6 +47,8 @@ test("migrated gallery filters original artwork and supports the lightbox", asyn
 }) => {
   await page.goto("/portfolio");
   await expect(page.locator(".project")).toHaveCount(43);
+  for (const image of await page.locator(".project img").all())
+    await expect(image).toHaveAttribute("src", /mockups.*photographic/);
   await expect(page.locator(".portfolio-pending")).toHaveCount(0);
   await page.getByRole("button", { name: "Book Covers", exact: true }).click();
   await expect(page.locator(".project")).toHaveCount(6);

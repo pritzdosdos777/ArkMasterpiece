@@ -13,14 +13,14 @@ export type MockupKind =
 export const mockupLabels: Record<MockupKind, string> = {
   book: "Book cover mockup",
   sign: "Brand sign mockup",
-  poster: "Framed print mockup",
+  poster: "Printed campaign mockup",
   laptop: "Social creative on laptop",
   phone: "Social creative on phone",
   tablet: "Email design on tablet",
   product: "Apparel concept display",
   stationery: "Brand stationery mockup",
   "email-studio": "Email campaign on devices",
-  "apparel-photo": "Apparel flatlay mockup",
+  "apparel-photo": "Apparel photo mockup",
 };
 export function mockupKind(project: Project): MockupKind {
   if (project.mockup) return project.mockup.kind;

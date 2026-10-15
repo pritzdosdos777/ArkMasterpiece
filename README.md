@@ -58,7 +58,7 @@ Never use `NEXT_PUBLIC_` for credentials. Configure secrets securely in your dep
 
 ## Vercel preparation
 
-Import this GitHub feature branch into Vercel only after approval to deploy. Framework preset: Next.js; install: `npm ci`; build: `npm run build`; output: default. Add the server environment variables above. Set `SITE_URL` to the approved domain so sitemap generation uses a real origin. Without it, sitemap is empty rather than publishing an invented URL. Metadata titles/descriptions and Open Graph title/description are included. Add a real branded social image after receiving approved artwork.
+The owner has authorized publishing and supplied the Vercel site address. Connect this GitHub feature branch in Vercel to deploy these updates. Framework preset: Next.js; install: `npm ci`; build: `npm run build`; output: default. Add the server environment variables above. Set `SITE_URL` to the approved domain so sitemap generation uses a real origin. Without it, sitemap is empty rather than publishing an invented URL. Metadata titles/descriptions and Open Graph title/description are included. Add a real branded social image after receiving approved artwork.
 
 Before promoting the live site: review the migrated Wix artwork (43 pieces and two portraits; see migration report), confirm services and copy, supply the Ark Masterpiece logo/contact links, add privacy information appropriate to the chosen delivery provider, test real email delivery, and review desktop/mobile views. Do not publish placeholder work as finished portfolio content.
 
@@ -72,7 +72,7 @@ git switch -c main origin/feat/ark-masterpiece-website
 git push -u origin main
 ```
 
-Then select `main` as the default branch in GitHub repository settings. If a `main` branch has since been created, use a normal pull request instead and resolve any history differences deliberately. No public website deployment or paid service is authorized by this implementation.
+Then select `main` as the default branch in GitHub repository settings. If a `main` branch has since been created, use a normal pull request instead and resolve any history differences deliberately. The owner subsequently authorized public deployment. Paid services remain unapproved. This environment has no Vercel project credentials and cannot verify deployment completion.
 
 The offline ZIP in `downloads/` is an earlier review snapshot from before artwork migration. The website source and gallery are current; the ZIP is not a live-site backup.
 
@@ -86,29 +86,18 @@ The email address and Facebook, Instagram and LinkedIn links in `site` come from
 
 ## Portfolio mockup presentations
 
-All **43 portfolio items** have a separate rendered mockup in `public/portfolio/mockups/`. The five Wix collections and their source order remain intact. The gallery defaults to mockups; “Original artwork” switches to the preserved designs. The fullscreen viewer has the same switch and a full-resolution original link. The homepage's six featured items also show their mockups.
+All **43 portfolio items** use photographic concept mockups in `public/portfolio/mockups/photographic/`. The five Wix collections and their source order remain intact. The gallery defaults to mockups; “Original artwork” switches to the preserved designs. The fullscreen viewer has the same switch and a full-resolution original link.
 
-- Book covers: physical book presentations with covers, spine and page edges.
-- Logos: illustrative mounted brand signs.
-- Other graphics: framed print presentations.
-- Social graphics and Meta ad creatives: laptop or phone previews, chosen for the artwork's proportions.
-- Email designs: tablet previews with the complete layout preserved.
-- Product artwork: concept display boards, preserving the existing garment mockups inside the supplied art.
+- Book Covers: printed paperback presentations with realistic page edges.
+- Designs & Logos: stationery, cards, and printed campaign posters.
+- Social Media Graphics: real-looking phones presenting each original creative.
+- Email Marketing Designs: laptop and tablet presentations.
+- Product Designs: apparel presentations with fabric and print texture.
 
-The images are concept presentations, not evidence of real installations, live posts, campaign metrics, or printed production. No client names, social engagement counts or results have been invented. Portraits remain real photos and are not included in these 43 creative mockups.
+These are image-tool-generated photographic interpretations using the original artwork as reference, not actual client product shoots or byte-for-byte composites. Fine lettering, material texture and collateral details may vary. They do not establish real installations, live posts, engagement metrics or printed production. Original artwork remains authoritative. All original artwork files, dimensions and source hashes are unchanged. Portraits remain real photographs and are separate from these 43 creative mockups.
 
-`src/components/mockup.tsx` and the scene styles in `globals.css` are the editable book/sign/device templates. Each editable studio scene uses the actual unmodified portfolio image; photographic concept exports use the source as an image-generation reference. `public/brand/mockup-studio.webp` is a generated decorative backdrop. `src/data/mockups.ts` chooses suitable templates; a project's optional `mockup` metadata points to its rendered export. The gallery's original `image`, `original`, dimensions and source hashes remain unchanged.
+`docs/photographic-mockups.json` records the source and generated file for every item. `docs/mockup-manifest.json` maps the website export to its project. Each project's `mockup` metadata contains its path, dimensions, presentation kind and `method: "photographic"`. To replace a presentation, preserve the original artwork, create a new referenced image, optimize it as WebP, update the metadata and provenance, then rebuild and verify the gallery. Do not regenerate photographic images with the legacy studio renderer; it skips photographic entries.
 
-### Export / refresh
+### Download collection
 
-The 37 studio presentations use template renders made with Chromium at 3× pixel density; six featured presentations now use photographic image-tool outputs. `docs/mockup-manifest.json` maps each export to its project and source. To refresh them, back up `src/data/projects.json`, temporarily remove only non-photographic `mockup` fields, build and start that version, then run `node scripts/render-mockups.mjs` from the repository root. The script refuses to screenshot existing studio exports and retains photographic entries unchanged. It writes all metadata only after rendering succeeds. Restore the backup on failure. Stop the server, rebuild and verify the updated gallery afterwards.
-
-Run `node scripts/package-mockups.mjs` to create the downloadable PNG collection. This needs Node, sharp and Python 3. Temporary PNGs are written under the ignored `.mockup-exports/`; the ZIP is saved to `downloads/Ark-Masterpiece-Mockup-Collection.zip`. They are presentation-resolution PNGs, not print-production masters or editable 3D files.
-
-### Photographic featured-work upgrade
-
-The six featured pieces now use photographic concept mockups matching the supplied dark wood / warm bronze reference: paperback books, Ahria and Worshipper stationery, an Elite Spine ad on phones, Annie & Lori email on laptop/tablet, and a Women of Wonders apparel flatlay. The other 37 retain their existing studio presentations. The original 43 designs and all source files remain unchanged and accessible.
-
-The six new images are image-tool-generated photographic interpretations of the supplied original artwork. They are not actual client product shoots or byte-for-byte composites; fine lettering, material texture and collateral details may vary. Original artwork remains authoritative. Source/derivative mapping is recorded in `docs/photographic-mockups.json`, and `mockup.method: "photographic"` distinguishes them from scene renders. The archive now includes the six upgraded presentations alongside the other 37.
-
-Do not regenerate photographic images through the studio renderer. Preserve their metadata; the renderer retains those six while refreshing the remaining editable studio scenes. To refresh studio scenes, back up the catalog, remove only non-photographic `mockup` fields, rebuild/start, render, then rebuild again.
+Run `node scripts/package-mockups.mjs` to build `downloads/Ark-Masterpiece-Mockup-Collection.zip`. It contains all 43 optimized WebP presentations in the five category folders, the prepared logo as PNG, and opening instructions. WebP works in current browsers and image viewers; these are presentation-resolution images, not print-production masters or editable 3D files. The script uses Node, sharp and Python 3; temporary files go to ignored `.mockup-exports/`.
