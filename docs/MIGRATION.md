@@ -17,7 +17,7 @@ The portfolio now contains:
 | Product Designs         |      3 |
 | **Total**               | **43** |
 
-The homepage features a book cover, an ad creative, and an apparel design. Its About preview uses the studio photo; the About page uses the second portrait. The pink and blue **Ark Designs** logos remain portfolio artwork. They are not presented as a replacement permanent logo for **Ark Masterpiece**.
+The homepage features six original pieces selected across the existing categories. Its About preview uses the studio photo; the About page uses the second portrait. The pink and blue **Ark Designs** logos remain portfolio artwork. They are not presented as a replacement permanent logo for **Ark Masterpiece**.
 
 `docs/wix-assets.json` records each source URL/page, source filename, original dimensions, local original, optimized version, byte size, and original SHA-256. `src/data/projects.json` contains the editable gallery content. Titles and alt text describe the visible art; no project outcomes, client endorsements, or testimonials have been invented.
 
@@ -44,7 +44,7 @@ If the two inaccessible assets or a showreel are wanted, supply the original fil
 
 ## Maintenance
 
-To update a gallery item, edit `src/data/projects.json`. `image` points to the optimized WebP; `original` points to the untouched source PNG/JPEG. Use actual pixel dimensions for the image being rendered. Set `featured: true` on exactly three items to control the homepage selection. Retain aspect ratios and use truthful descriptions. See README for more detail.
+To update a gallery item, edit `src/data/projects.json`. `image` points to the optimized WebP; `original` points to the untouched source PNG/JPEG. Use actual pixel dimensions for the image being rendered. Set `featured: true` on exactly six items to control the homepage selection. Retain aspect ratios and use truthful descriptions. See README for more detail.
 
 ## Gallery arrangement
 

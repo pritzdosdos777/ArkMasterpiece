@@ -1,6 +1,37 @@
+import Image from "next/image";
 import Link from "next/link";
+import {
+  Camera,
+  PenTool,
+  Clapperboard,
+  PanelsTopLeft,
+  Mail,
+  Handshake,
+  ArrowRight,
+} from "lucide-react";
 import { Arrow, Reveal } from "./ui";
-import { services, site, testimonials } from "@/data/content";
+import { Brand } from "./brand";
+import { services, site } from "@/data/content";
+const serviceIcons = [
+  Handshake,
+  Camera,
+  PenTool,
+  PanelsTopLeft,
+  Clapperboard,
+  PanelsTopLeft,
+  Mail,
+  Handshake,
+];
+const serviceIds = [
+  "virtual-assistance",
+  "social-media",
+  "graphic-design",
+  "digital-marketing",
+  "video-content",
+  "websites-funnels",
+  "email-marketing",
+  "business-support",
+];
 export function Intro({
   eyebrow,
   title,
@@ -18,104 +49,145 @@ export function Intro({
     </section>
   );
 }
-export function Services({ limit = 8 }: { limit?: number }) {
+export function Services({ compact = false }: { compact?: boolean }) {
+  const indices = compact ? [1, 2, 4, 5, 6, 0] : services.map((_, i) => i);
   return (
-    <div className="services-grid">
-      {services.slice(0, limit).map(([name, desc], i) => (
-        <Reveal key={name}>
-          <article className="service">
-            <span className="index">0{i + 1}</span>
-            <h3>{name}</h3>
-            <p>{desc}</p>
-            <span className="status">
-              Proposed service · owner confirmation pending
-            </span>
-          </article>
-        </Reveal>
-      ))}
+    <div
+      className={compact ? "services-grid compact-services" : "services-grid"}
+    >
+      {indices.map((i) => {
+        const [name, description] = services[i];
+        const Icon = serviceIcons[i];
+        return (
+          <Reveal key={name}>
+            <article id={serviceIds[i]} className="service">
+              <span className="service-icon">
+                <Icon size={25} strokeWidth={1.15} aria-hidden="true" />
+              </span>
+              <h3>{name}</h3>
+              <p>{description}</p>
+              {!compact && (
+                <span className="status">
+                  Proposed scope · confirm availability when enquiring
+                </span>
+              )}
+              <Link
+                href={compact ? "/services#" + serviceIds[i] : "/contact"}
+                className="service-arrow"
+                aria-label={
+                  compact ? "Explore " + name : "Enquire about " + name
+                }
+              >
+                <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </article>
+          </Reveal>
+        );
+      })}
     </div>
   );
 }
 export function CTA() {
   return (
     <section className="cta">
-      <p className="eyebrow">LET’S CREATE SOMETHING MEANINGFUL</p>
-      <h2>
-        Your next chapter,
-        <br />
-        <em>beautifully made.</em>
-      </h2>
-      <Link className="button light" href="/contact">
-        Let’s discuss your project <Arrow />
-      </Link>
+      <Image
+        src="/brand/studio-desk.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="cta-image"
+      />
+      <div className="cta-content">
+        <p className="eyebrow">READY TO GET STARTED?</p>
+        <h2>
+          Let’s Work <em>Together.</em>
+        </h2>
+        <p>
+          Whether you need creative support, digital marketing, or a reliable
+          VA,
+          <br className="desktop-break" /> Ark Masterpiece is here to help.
+        </p>
+        <Link className="button" href="/contact">
+          Book a consultation <Arrow />
+        </Link>
+      </div>
+    </section>
+  );
+}
+export function Process() {
+  return (
+    <section className="process section">
+      <div className="process-heading">
+        <p className="eyebrow">OUR PROCESS</p>
+        <h2>Simple. Clear. Effective.</h2>
+      </div>
+      <ol>
+        {[
+          ["Discover", "We learn about your goals, needs, and vision."],
+          ["Plan", "We create a thoughtful approach and a clear roadmap."],
+          [
+            "Create",
+            "We bring your ideas to life with considered, purposeful work.",
+          ],
+          ["Grow", "We review, refine, and plan your next steps together."],
+        ].map(([title, description], i) => (
+          <li key={title}>
+            <span className="step-number">0{i + 1}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
 export function Footer() {
+  const labels: Record<string, string> = {
+    Facebook: "f",
+    Instagram: "ig",
+    LinkedIn: "in",
+  };
   return (
     <footer>
-      <div>
-        <Link className="wordmark" href="/">
-          ark<span>MASTERPIECE</span>
-        </Link>
-        <p>
-          Thoughtful creativity. Reliable support.
-          <br />
-          Digital possibilities, brought to life.
-        </p>
-      </div>
-      <div>
-        <p className="eyebrow">EXPLORE</p>
-        {["About", "Services", "Portfolio", "Contact"].map((n) => (
-          <Link key={n} href={"/" + n.toLowerCase()}>
-            {n}
-          </Link>
-        ))}
-      </div>
-      <div>
-        <p className="eyebrow">LET’S CONNECT</p>
-        {site.email ? (
-          <a href={"mailto:" + site.email}>{site.email}</a>
-        ) : (
-          <p>Contact email coming soon.</p>
-        )}
-        {site.socials.map((s) => (
-          <a key={s.label} href={s.url} rel="noopener noreferrer">
-            {s.label}
+      <div className="footer-main">
+        <Brand />
+        <nav aria-label="Footer navigation">
+          {["Home", "Services", "Portfolio", "About", "Contact"].map((n) => (
+            <Link key={n} href={n === "Home" ? "/" : "/" + n.toLowerCase()}>
+              {n}
+            </Link>
+          ))}
+        </nav>
+        <div className="social-links">
+          {site.socials.map((s) => {
+            const label = labels[s.label];
+            return (
+              <a
+                key={s.label}
+                href={s.url}
+                aria-label={s.label}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="social-abbrev" aria-hidden="true">
+                  {label || s.label}
+                </span>
+              </a>
+            );
+          })}
+          <a href={"mailto:" + site.email} aria-label="Email Jean Monica">
+            <Mail size={18} strokeWidth={1.5} />
           </a>
-        ))}
-        <Link href="/contact">Start a conversation ↗</Link>
+        </div>
       </div>
-      <small>
-        © {new Date().getFullYear()} Ark Masterpiece. All rights reserved.
-      </small>
+      <div className="footer-bottom">
+        <small>
+          © {new Date().getFullYear()} Ark Masterpiece. All rights reserved.
+        </small>
+        <span>Thoughtful creativity. Reliable support.</span>
+      </div>
     </footer>
-  );
-}
-export function Testimonials() {
-  return (
-    <section className="section">
-      <p className="eyebrow">WORDS FROM COLLABORATORS</p>
-      <h2>
-        Good work starts with
-        <br />
-        <em>good relationships.</em>
-      </h2>
-      {testimonials.length ? (
-        testimonials.map((t) => (
-          <blockquote key={t.name}>
-            <p>“{t.quote}”</p>
-            <cite>
-              {t.name} {t.role}
-            </cite>
-          </blockquote>
-        ))
-      ) : (
-        <p className="draft">
-          Testimonials · Draft section. Verified client feedback will appear
-          here when available.
-        </p>
-      )}
-    </section>
   );
 }

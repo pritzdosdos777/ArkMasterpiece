@@ -68,7 +68,8 @@
     "original": "/portfolio/graphic-design/iphone-8-plus-4-d75cbabd.png",
     "alt": "Ahria’s Adventure logo with an orange compass and black script",
     "width": 828,
-    "height": 682
+    "height": 682,
+    "featured": true
   },
   {
     "id": "wix-0f5aac542872",
@@ -118,7 +119,8 @@
     "original": "/portfolio/graphic-design/worshipper-50bbcaa9.png",
     "alt": "Circular Worshipper logo with a gold wing-shaped W",
     "width": 1920,
-    "height": 1080
+    "height": 1080,
+    "featured": true
   },
   {
     "id": "wix-fb59991bc073",
@@ -349,7 +351,8 @@
     "original": "/portfolio/email-marketing/annie-and-lori-f2363fb3.png",
     "alt": "Full-length Annie and Lori email layout with footwear and lifestyle photography",
     "width": 1200,
-    "height": 3780
+    "height": 3780,
+    "featured": true
   },
   {
     "id": "wix-b76533a04a8f",

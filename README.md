@@ -41,7 +41,7 @@ Run `npm run lint`, `npm run typecheck`, `npm run build`, and `npm test`. Browse
 }
 ```
 
-Use actual pixel dimensions for the rendered image and descriptive alt text. Keep an untouched original and reference it using `original` so visitors can open it from the lightbox. Set `featured: true` on three projects to choose the homepage previews. Images retain their proportions; no content is cropped. Only categories with real projects appear. Use the five Wix category names exactly: Book Covers, Designs & Logos, Social Media Graphics, Email Marketing Designs, Product Designs. Their display order is set in `portfolioCategories` in `src/data/content.ts`. Gallery buttons open the full image; Escape closes, arrow keys navigate, Tab stays in the dialog. Next Image creates optimized variants automatically. Do not put confidential or unlicensed work in public assets. Videos currently require a separate authorized hosted link or a future player integration; the current gallery supports images and video thumbnails only.
+Use actual pixel dimensions for the rendered image and descriptive alt text. Keep an untouched original and reference it using `original` so visitors can open it from the lightbox. Set `featured: true` on six projects to choose the homepage showcase. Images retain their proportions; no content is cropped. Only categories with real projects appear. Use the five Wix category names exactly: Book Covers, Designs & Logos, Social Media Graphics, Email Marketing Designs, Product Designs. Their display order is set in `portfolioCategories` in `src/data/content.ts`. Gallery buttons open the full image; Escape closes, arrow keys navigate, Tab stays in the dialog. Next Image creates optimized variants automatically. Do not put confidential or unlicensed work in public assets. Videos currently require a separate authorized hosted link or a future player integration; the current gallery supports images and video thumbnails only.
 
 Update `site.email` and `site.socials` with verified contact details. Proposed services need owner confirmation. Add only verified testimonials to the typed array; otherwise the section remains clearly marked as draft. The text wordmark is temporary, not a permanent logo. Fonts use a local system Georgia/Arial stack to avoid external font requests; licensed local font files can replace them later.
 
@@ -75,3 +75,11 @@ git push -u origin main
 Then select `main` as the default branch in GitHub repository settings. If a `main` branch has since been created, use a normal pull request instead and resolve any history differences deliberately. No public website deployment or paid service is authorized by this implementation.
 
 The offline ZIP in `downloads/` is an earlier review snapshot from before artwork migration. The website source and gallery are current; the ZIP is not a live-site backup.
+
+## Black and gold design
+
+The current design follows the owner-supplied reference: a dark editorial hero, champagne gold buttons, cream service panels, a six-item portfolio showcase, real founder portrait, four-step process and a photographic contact banner. The same colors, typography and navigation apply to all five pages. On mobile, the navigation collapses, services become stacked rows, and the work showcase becomes a two-column grid. Reduced-motion preferences remain supported.
+
+`public/brand/studio-desk.webp` is a generated decorative studio scene, not client work or a real business premises. The actual portfolio and founder photos remain original Wix imports. The approved Ark Masterpiece image logo has only been supplied inline in chat, without a retrievable file; `src/components/brand.tsx` uses the business name as typography until the original PNG/JPG is available. No permanent replacement symbol has been invented.
+
+The email address and Facebook, Instagram and LinkedIn links in `site` come from the public Wix contact/About sections. Consultation buttons lead to an inquiry page, not an automated calendar booking. Form delivery still requires configuration; visitors can use the published business email directly. Unverified testimonials are omitted from the homepage.

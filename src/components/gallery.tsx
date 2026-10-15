@@ -14,7 +14,7 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
         ? p.featured
         : category === "All Projects" || p.category === category,
     )
-    .slice(0, preview ? 3 : undefined);
+    .slice(0, preview ? 6 : undefined);
   const categories = [
     "All Projects",
     ...portfolioCategories

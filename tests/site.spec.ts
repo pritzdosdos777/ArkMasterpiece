@@ -15,7 +15,7 @@ for (const width of [375, 768, 1440]) {
     if (width === 375) {
       await page.getByRole("button", { name: "Open navigation" }).click();
       await page
-        .getByRole("navigation")
+        .getByRole("navigation", { name: "Main navigation" })
         .getByRole("link", { name: "Portfolio", exact: true })
         .click();
       await expect(page).toHaveURL(/portfolio/);
@@ -107,17 +107,20 @@ test("all migrated artwork and portraits load", async ({ page }) => {
   }
 });
 
-test("homepage features three uncropped designs in one desktop row", async ({
+test("homepage features six uncropped designs in a balanced showcase", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/");
   const cards = page.locator(".preview-gallery .project");
-  await expect(cards).toHaveCount(3);
+  await expect(cards).toHaveCount(6);
   const tops = await cards.evaluateAll((nodes) =>
     nodes.map((e) => e.getBoundingClientRect().top),
   );
-  expect(Math.max(...tops) - Math.min(...tops)).toBeLessThan(2);
+  expect(
+    Math.max(...tops.slice(0, 3)) - Math.min(...tops.slice(0, 3)),
+  ).toBeLessThan(2);
+  expect(tops[3]).toBeGreaterThan(tops[0]);
 });
 
 test("collections follow the Wix categories and artwork order", async ({
@@ -147,4 +150,27 @@ test("collections follow the Wix categories and artwork order", async ({
     "Designs & Logos",
   ]);
   await expect(page.locator(".project")).toHaveCount(7);
+});
+
+test("mockup consultation and service links lead to working inquiry pages", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".hero h1")).toContainText("Creative Partner");
+  await expect(page.locator(".compact-services .service")).toHaveCount(6);
+  await expect(page.locator(".process li")).toHaveCount(4);
+  await page
+    .locator(".hero")
+    .getByRole("link", { name: "Book a consultation" })
+    .click();
+  await expect(page).toHaveURL(/contact/);
+  await expect(
+    page.getByRole("link", { name: "jeanmonicarche@gmail.com", exact: true }),
+  ).toHaveAttribute("href", "mailto:jeanmonicarche@gmail.com");
+  await page.goto("/");
+  await page
+    .getByRole("link", { name: "Explore Social Media Management" })
+    .click();
+  await expect(page).toHaveURL(/services#social-media$/);
+  await expect(page.locator("#social-media")).toBeInViewport();
 });

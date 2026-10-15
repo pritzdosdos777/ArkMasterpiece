@@ -1,6 +1,8 @@
 "use client";
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { Brand } from "./brand";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 export function Reveal({ children }: { children: React.ReactNode }) {
@@ -18,24 +20,33 @@ export function Reveal({ children }: { children: React.ReactNode }) {
 }
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   return (
     <header>
-      <Link className="wordmark" href="/" aria-label="Ark Masterpiece home">
-        ark<span>MASTERPIECE</span>
-      </Link>
+      <Brand />
       <button
         className="menu-toggle"
         aria-label={open ? "Close navigation" : "Open navigation"}
         aria-expanded={open}
+        aria-controls="main-navigation"
         onClick={() => setOpen(!open)}
       >
         {open ? <X /> : <Menu />}
       </button>
-      <nav className={open ? "open" : ""} aria-label="Main navigation">
-        {["Home", "About", "Services", "Portfolio", "Contact"].map((n) => (
+      <nav
+        id="main-navigation"
+        className={open ? "open" : ""}
+        aria-label="Main navigation"
+      >
+        {["Home", "Services", "Portfolio", "About", "Contact"].map((n) => (
           <Link
             onClick={() => setOpen(false)}
             href={n === "Home" ? "/" : "/" + n.toLowerCase()}
+            aria-current={
+              pathname === (n === "Home" ? "/" : "/" + n.toLowerCase())
+                ? "page"
+                : undefined
+            }
             key={n}
           >
             {n}
@@ -46,7 +57,7 @@ export function Header() {
           className="nav-cta"
           href="/contact"
         >
-          Let’s work together <ArrowUpRight size={15} />
+          Book a consultation <ArrowUpRight size={15} />
         </Link>
       </nav>
     </header>

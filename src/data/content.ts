@@ -2,8 +2,15 @@ import importedProjects from "./projects.json";
 export const site = {
   name: "Ark Masterpiece",
   owner: "Jean Monica",
-  email: "",
-  socials: [] as { label: string; url: string }[],
+  email: "jeanmonicarche@gmail.com",
+  socials: [
+    { label: "Facebook", url: "https://www.facebook.com/jnmncpnl" },
+    { label: "Instagram", url: "https://www.instagram.com/jnmncpnl/" },
+    {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/jean-monica-panelo-3b6547317/",
+    },
+  ] as { label: string; url: string }[],
 };
 export const services = [
   [
