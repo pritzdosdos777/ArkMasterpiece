@@ -2190,3 +2190,17 @@ textarea {
     animation: none !important;
   }
 }
+
+/* Preserve the complete square portrait supplied by the owner. */
+.founder .portrait-frame {
+  height: auto;
+  padding: 0;
+  align-self: center;
+}
+.founder .portrait-frame img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  transform: none;
+}

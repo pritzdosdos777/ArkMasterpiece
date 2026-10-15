@@ -72,10 +72,9 @@ export const testimonials: { quote: string; name: string; role?: string }[] =
   [];
 
 export const portraits = {
-  studio:
-    "/portfolio/brand/491149302-3571333653169275-6331022036814-eafc8697.webp",
-  studioWidth: 1365,
-  studioHeight: 2048,
+  studio: "/brand/founder.webp",
+  studioWidth: 1254,
+  studioHeight: 1254,
   about: "/portfolio/brand/new-0cf372e9.webp",
   aboutWidth: 1889,
   aboutHeight: 2534,

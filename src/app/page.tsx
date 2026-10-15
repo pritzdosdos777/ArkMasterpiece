@@ -99,7 +99,7 @@ export default function Home() {
         <div className="portrait-frame studio-portrait">
           <Image
             src={portraits.studio}
-            alt="Jean Monica wearing a dark blazer"
+            alt="Jean Monica in a cream blazer, smiling at her laptop"
             width={portraits.studioWidth}
             height={portraits.studioHeight}
             sizes="(max-width: 700px) 100vw, 45vw"

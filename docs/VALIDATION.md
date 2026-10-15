@@ -81,3 +81,9 @@ Production build, lint and TypeScript checks passed. All **24 Playwright tests p
 The new founder image is visible only as an inline chat image and has no downloadable attachment ID or local source file available to this environment. The current portrait remains unchanged. Replacement requires the exact JPG/PNG file; no generated portrait substitute has been created. Public Vercel deployment remains unverified.
 
 The integrated Video Editing filter was visually reviewed at 1440px and 375px, alongside featured-work screenshots after the entrance animations completed.
+
+## Founder photo resolved from ZIP
+
+`Founder.zip` was retrieved successfully and contained `Founder.PNG` (1254×1254). The exact PNG is preserved at `public/brand/founder-original.png`; `public/brand/founder.webp` is an optimized WebP without generated edits or changes to composition. The homepage founder image, dimensions and alt text now reference this photo. The square portrait is displayed in full at desktop and mobile widths. The About-page image is separately configured. Source provenance and SHA-256 are recorded in `founder-photo.json`. This resolves the earlier inline-attachment blocker.
+
+Production build, lint and TypeScript checks passed. All **6 targeted Playwright tests passed** (the five responsive navigation/layout checks and all image/portrait loading). The unchanged video tests were not rerun for this image-only update. Desktop 1440px and mobile 375px founder-section screenshots were visually inspected, and the rendered image was checked to remain square. Original PNG bytes match the file extracted from the ZIP. Public Vercel redeployment remains unverified.
