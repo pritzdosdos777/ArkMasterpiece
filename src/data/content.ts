@@ -58,7 +58,13 @@ export type Project = {
   description?: string;
   original?: string;
   featured?: boolean;
-  mockup?: { src: string; width: number; height: number; kind: MockupKind };
+  mockup?: {
+    src: string;
+    width: number;
+    height: number;
+    kind: MockupKind;
+    method?: "scene-render" | "photographic";
+  };
 };
 // Add only owner-approved original artwork. See README for the complete guide.
 export const projects: Project[] = importedProjects as Project[];

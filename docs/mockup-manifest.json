@@ -12,10 +12,11 @@
     "id": "wix-d6562ca3de99",
     "title": "Live Not on Bread Alone",
     "original": "/portfolio/book-covers/live-not-on-bread-1-b2dabd20.png",
-    "src": "/portfolio/mockups/wix-d6562ca3de99.webp",
-    "width": 1212,
-    "height": 912,
-    "kind": "book"
+    "src": "/portfolio/mockups/photographic/wix-d6562ca3de99.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "book",
+    "method": "photographic"
   },
   {
     "id": "wix-ddc7566fa679",
@@ -57,10 +58,11 @@
     "id": "wix-48192b6f518e",
     "title": "Ahria’s Adventure — logo",
     "original": "/portfolio/graphic-design/iphone-8-plus-4-d75cbabd.png",
-    "src": "/portfolio/mockups/wix-48192b6f518e.webp",
-    "width": 1215,
-    "height": 912,
-    "kind": "sign"
+    "src": "/portfolio/mockups/photographic/wix-48192b6f518e.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "stationery",
+    "method": "photographic"
   },
   {
     "id": "wix-0f5aac542872",
@@ -102,10 +104,11 @@
     "id": "wix-a68d32a77b7c",
     "title": "Worshipper — logo",
     "original": "/portfolio/graphic-design/worshipper-50bbcaa9.png",
-    "src": "/portfolio/mockups/wix-a68d32a77b7c.webp",
-    "width": 1215,
-    "height": 912,
-    "kind": "sign"
+    "src": "/portfolio/mockups/photographic/wix-a68d32a77b7c.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "stationery",
+    "method": "photographic"
   },
   {
     "id": "wix-fb59991bc073",
@@ -129,10 +132,11 @@
     "id": "wix-5097f46c4614",
     "title": "Elite Spine — chiropractic adjustments",
     "original": "/portfolio/social-media/elite-spine-houston-meta-creatives-2-2a18ca2e.png",
-    "src": "/portfolio/mockups/wix-5097f46c4614.webp",
-    "width": 1212,
-    "height": 912,
-    "kind": "laptop"
+    "src": "/portfolio/mockups/photographic/wix-5097f46c4614.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "phone",
+    "method": "photographic"
   },
   {
     "id": "wix-9d7b55bdee0a",
@@ -309,10 +313,11 @@
     "id": "wix-8125f6af8e4e",
     "title": "Annie & Lori — email design",
     "original": "/portfolio/email-marketing/annie-and-lori-f2363fb3.png",
-    "src": "/portfolio/mockups/wix-8125f6af8e4e.webp",
-    "width": 1215,
-    "height": 912,
-    "kind": "tablet"
+    "src": "/portfolio/mockups/photographic/wix-8125f6af8e4e.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "email-studio",
+    "method": "photographic"
   },
   {
     "id": "wix-b76533a04a8f",
@@ -363,10 +368,11 @@
     "id": "wix-e290b3cb34c7",
     "title": "Woman of Wonder — apparel mockup",
     "original": "/portfolio/product-designs/frame-20-4a331c22.png",
-    "src": "/portfolio/mockups/wix-e290b3cb34c7.webp",
-    "width": 1215,
-    "height": 912,
-    "kind": "product"
+    "src": "/portfolio/mockups/photographic/wix-e290b3cb34c7.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "apparel-photo",
+    "method": "photographic"
   },
   {
     "id": "wix-fcf277d213a7",

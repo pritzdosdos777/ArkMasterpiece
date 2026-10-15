@@ -1,6 +1,15 @@
 import type { Project } from "./content";
 export type MockupKind =
-  "book" | "sign" | "poster" | "laptop" | "phone" | "tablet" | "product";
+  | "book"
+  | "sign"
+  | "poster"
+  | "laptop"
+  | "phone"
+  | "tablet"
+  | "product"
+  | "stationery"
+  | "email-studio"
+  | "apparel-photo";
 export const mockupLabels: Record<MockupKind, string> = {
   book: "Book cover mockup",
   sign: "Brand sign mockup",
@@ -9,6 +18,9 @@ export const mockupLabels: Record<MockupKind, string> = {
   phone: "Social creative on phone",
   tablet: "Email design on tablet",
   product: "Apparel concept display",
+  stationery: "Brand stationery mockup",
+  "email-studio": "Email campaign on devices",
+  "apparel-photo": "Apparel flatlay mockup",
 };
 export function mockupKind(project: Project): MockupKind {
   if (project.mockup) return project.mockup.kind;

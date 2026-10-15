@@ -82,8 +82,7 @@ export default function Home() {
           <p className="eyebrow">FEATURED WORK</p>
           <h2>
             A Showcase
-            <br />
-            of <em>Possibilities</em>
+            <br /> of <em>Possibilities</em>
           </h2>
           <p>
             A glimpse of original work, from book covers and brand designs to

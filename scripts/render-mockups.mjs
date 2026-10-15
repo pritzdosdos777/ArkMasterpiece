@@ -8,7 +8,7 @@ const root = process.cwd();
 const projects = JSON.parse(
   await fs.readFile(path.join(root, "src/data/projects.json"), "utf8"),
 );
-if (projects.some((p) => p.mockup))
+if (projects.some((p) => p.mockup && p.mockup.method !== "photographic"))
   throw new Error(
     "Remove mockup fields temporarily and rebuild before regenerating scene images; do not screenshot an existing render. Preserve and restore metadata if rendering fails.",
   );
@@ -35,6 +35,15 @@ try {
   });
   const manifest = [];
   for (const project of projects) {
+    if (project.mockup?.method === "photographic") {
+      manifest.push({
+        id: project.id,
+        title: project.title,
+        original: project.original,
+        ...project.mockup,
+      });
+      continue;
+    }
     const scene = page.locator(
       `[data-project-id="${project.id}"] .mockup-scene`,
     );

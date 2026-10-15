@@ -34,3 +34,9 @@ The owner-supplied black, gold and cream reference has been applied across all f
 - Representative book, sign, phone, desktop gallery and mobile lightbox presentations were visually inspected. All presentations are explicitly labeled as mockups; no posts, shops, installations or performance results are claimed.
 
 Public Vercel redeployment remains unverified from this restricted execution environment. Pushing the GitHub branch is not proof that Vercel has finished rebuilding.
+
+## Photographic featured-work upgrade
+
+The six featured pieces now use photographic concept mockups based on their original assets. All six outputs were visually inspected for composition, legible main artwork and consistency with the warm dark-desk reference. Fine details are illustrative, with unmodified originals retained separately. The homepage test checks that all six featured thumbnails use the new photographic files. The remaining 37 presentations and the Wix category order are preserved. The archive was rebuilt to include the updated six.
+
+All 13 tests passed on the photographic update, with production build, TypeScript and lint checks. Desktop and mobile featured-work screenshots were visually inspected. Six image-tool photographic concepts replace the former featured studio frames; original artwork files and hashes remain unchanged.

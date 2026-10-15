@@ -1,0 +1,74 @@
+[
+  {
+    "id": "wix-d6562ca3de99",
+    "title": "Live Not on Bread Alone",
+    "sourceArtwork": "/portfolio/book-covers/live-not-on-bread-1-b2dabd20.png",
+    "generatedAsset": "exec-4ef83a92-a768-48be-a120-d53b971a0099.png",
+    "src": "/portfolio/mockups/photographic/wix-d6562ca3de99.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "book",
+    "method": "photographic",
+    "note": "Generated photographic concept using source artwork as reference. Fine details are illustrative; the unchanged original artwork remains authoritative."
+  },
+  {
+    "id": "wix-48192b6f518e",
+    "title": "Ahria’s Adventure — logo",
+    "sourceArtwork": "/portfolio/graphic-design/iphone-8-plus-4-d75cbabd.png",
+    "generatedAsset": "exec-6c8e67bb-8a8c-4f03-9cb8-3a87a33e4116.png",
+    "src": "/portfolio/mockups/photographic/wix-48192b6f518e.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "stationery",
+    "method": "photographic",
+    "note": "Generated photographic concept using source artwork as reference. Fine details are illustrative; the unchanged original artwork remains authoritative."
+  },
+  {
+    "id": "wix-a68d32a77b7c",
+    "title": "Worshipper — logo",
+    "sourceArtwork": "/portfolio/graphic-design/worshipper-50bbcaa9.png",
+    "generatedAsset": "exec-c1b03d8a-69eb-4ff6-b058-368025b933f0.png",
+    "src": "/portfolio/mockups/photographic/wix-a68d32a77b7c.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "stationery",
+    "method": "photographic",
+    "note": "Generated photographic concept using source artwork as reference. Fine details are illustrative; the unchanged original artwork remains authoritative."
+  },
+  {
+    "id": "wix-5097f46c4614",
+    "title": "Elite Spine — chiropractic adjustments",
+    "sourceArtwork": "/portfolio/social-media/elite-spine-houston-meta-creatives-2-2a18ca2e.png",
+    "generatedAsset": "exec-52fafbd9-f279-4cd6-9fd3-6c2164fb0515.png",
+    "src": "/portfolio/mockups/photographic/wix-5097f46c4614.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "phone",
+    "method": "photographic",
+    "note": "Generated photographic concept using source artwork as reference. Fine details are illustrative; the unchanged original artwork remains authoritative."
+  },
+  {
+    "id": "wix-8125f6af8e4e",
+    "title": "Annie & Lori — email design",
+    "sourceArtwork": "/portfolio/email-marketing/annie-and-lori-f2363fb3.png",
+    "generatedAsset": "exec-4888f3f1-9d93-4ee8-ab67-abefa782a84b.png",
+    "src": "/portfolio/mockups/photographic/wix-8125f6af8e4e.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "email-studio",
+    "method": "photographic",
+    "note": "Generated photographic concept using source artwork as reference. Fine details are illustrative; the unchanged original artwork remains authoritative."
+  },
+  {
+    "id": "wix-e290b3cb34c7",
+    "title": "Woman of Wonder — apparel mockup",
+    "sourceArtwork": "/portfolio/product-designs/frame-20-4a331c22.png",
+    "generatedAsset": "exec-365e8bc7-2123-4b8e-9d55-f32793620e3c.png",
+    "src": "/portfolio/mockups/photographic/wix-e290b3cb34c7.webp",
+    "width": 1448,
+    "height": 1086,
+    "kind": "apparel-photo",
+    "method": "photographic",
+    "note": "Generated photographic concept using source artwork as reference. Fine details are illustrative; the unchanged original artwork remains authoritative."
+  }
+]

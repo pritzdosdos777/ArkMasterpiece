@@ -121,6 +121,8 @@ test("homepage features six uncropped designs in a balanced showcase", async ({
   await page.goto("/");
   const cards = page.locator(".preview-gallery .project");
   await expect(cards).toHaveCount(6);
+  for (const image of await cards.locator("img").all())
+    await expect(image).toHaveAttribute("src", /photographic/);
   const tops = await cards.evaluateAll((nodes) =>
     nodes.map((e) => e.getBoundingClientRect().top),
   );

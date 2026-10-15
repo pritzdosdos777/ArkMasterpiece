@@ -245,7 +245,7 @@ export function Gallery({ preview = false }: { preview?: boolean }) {
               {filtered[active].title} · {active + 1} / {filtered.length}
               {dialogView === "mockups" && (
                 <p className="presentation-disclosure">
-                  Presentation mockup · original artwork preserved
+                  Concept mockup · original source available
                 </p>
               )}
               <button

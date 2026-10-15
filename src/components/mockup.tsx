@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { Project } from "@/data/content";
 import { mockupKind, mockupLabels } from "@/data/mockups";
-/** Layout scenes put the unchanged artwork on surfaces. No text or pixels are regenerated. */
+/** Displays the selected mockup export. Editable scene fallbacks use the source artwork directly. */
 export function Mockup({
   project,
   large = false,
