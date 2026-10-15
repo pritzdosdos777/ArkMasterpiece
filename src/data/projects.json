@@ -25,7 +25,6 @@
     "alt": "Live Not on Bread Alone book cover with bread imagery and bold black typography",
     "width": 2400,
     "height": 3607,
-    "featured": true,
     "mockup": {
       "src": "/portfolio/mockups/photographic/wix-d6562ca3de99.webp",
       "width": 1448,
@@ -49,7 +48,8 @@
       "height": 1086,
       "kind": "book",
       "method": "photographic"
-    }
+    },
+    "featured": true
   },
   {
     "id": "wix-40e593729865",
@@ -111,7 +111,6 @@
     "alt": "Ahria’s Adventure logo with an orange compass and black script",
     "width": 828,
     "height": 682,
-    "featured": true,
     "mockup": {
       "src": "/portfolio/mockups/photographic/wix-48192b6f518e.webp",
       "width": 1448,
@@ -186,7 +185,8 @@
       "height": 1254,
       "kind": "poster",
       "method": "photographic"
-    }
+    },
+    "featured": true
   },
   {
     "id": "wix-a68d32a77b7c",

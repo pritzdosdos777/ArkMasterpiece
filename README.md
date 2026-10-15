@@ -82,7 +82,7 @@ The current design follows the owner-supplied reference: a dark editorial hero, 
 
 `public/brand/studio-desk.webp` is a generated decorative studio scene, not client work or a real business premises. The actual portfolio and founder photos remain original Wix imports. The supplied gold logo is now displayed in the shared header and footer. `public/brand/ark-masterpiece-logo.webp` is an image-tool-prepared version of the inline attachment, not a byte-identical original upload or vector master. The full prepared mark and wordmark are included in the downloadable collection; the header/footer display its mark beside accessible typography.
 
-The email address and Facebook, Instagram and LinkedIn links in `site` come from the public Wix contact/About sections. Consultation buttons lead to an inquiry page, not an automated calendar booking. Form delivery still requires configuration; visitors can use the published business email directly. Unverified testimonials are omitted from the homepage.
+The email address and Facebook, Instagram and LinkedIn links in `site` come from the public Wix contact/About sections. All “Let’s work together” buttons, the footer email icon and the visible email address open Gmail web compose in a new tab, addressed to `site.email`. The shared `gmailComposeUrl` derives from that address. Gmail may ask visitors to sign in. The Contact navigation item still opens the contact page. Form delivery still requires configuration; visitors can use the published business email directly. Unverified testimonials are omitted from the homepage.
 
 ## Portfolio mockup presentations
 
@@ -101,3 +101,10 @@ These are image-tool-generated photographic interpretations using the original a
 ### Download collection
 
 Run `node scripts/package-mockups.mjs` to build `downloads/Ark-Masterpiece-Mockup-Collection.zip`. It contains all 43 optimized WebP presentations in the five category folders, the prepared logo as PNG, and opening instructions. WebP works in current browsers and image viewers; these are presentation-resolution images, not print-production masters or editable 3D files. The script uses Node, sharp and Python 3; temporary files go to ignored `.mockup-exports/`.
+
+
+## Video editing additions
+
+The portfolio now has a separate **Video Editing** section and jump link. `src/data/videos.json` records the eight owner-submitted videos. All eight uploads exceeded the attachment transfer tool's 32 MiB limit, so no video bytes could be retrieved. Their `src` values remain `null`; cards honestly display “Preview pending” with no fake play controls. See `docs/VIDEO-ADDITIONS.md` for the exact file list and remaining work.
+
+To enable an item, provide an accessible MP4 under `public/portfolio/videos/` or a direct HTTPS MP4 URL and set `src` accordingly. Use H.264 video/AAC audio with fast-start metadata for broad compatibility. Optionally set `poster` to a real extracted frame and `captions` to an accurate WebVTT file. Do not invent transcripts. The native player provides sound/fullscreen controls, inline mobile playback, `preload="none"`, no autoplay, a direct-open fallback link and a load-error message. Large source masters should be kept outside Git; use optimized web copies or appropriate media hosting. Verify real playback and captions after files are supplied; those checks cannot run on pending entries.

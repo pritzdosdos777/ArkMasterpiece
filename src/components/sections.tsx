@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Arrow, Reveal } from "./ui";
 import { Brand } from "./brand";
-import { services, site } from "@/data/content";
+import { services, site, gmailComposeUrl } from "@/data/content";
 const serviceIcons = [
   Handshake,
   Camera,
@@ -72,8 +72,10 @@ export function Services({ compact = false }: { compact?: boolean }) {
                 </span>
               )}
               <Link
-                href={compact ? "/services#" + serviceIds[i] : "/contact"}
+                href={compact ? "/services#" + serviceIds[i] : gmailComposeUrl}
                 className="service-arrow"
+                target={compact ? undefined : "_blank"}
+                rel={compact ? undefined : "noopener noreferrer"}
                 aria-label={
                   compact ? "Explore " + name : "Enquire about " + name
                 }
@@ -107,9 +109,14 @@ export function CTA() {
           VA,
           <br className="desktop-break" /> Ark Masterpiece is here to help.
         </p>
-        <Link className="button" href="/contact">
-          Book a consultation <Arrow />
-        </Link>
+        <a
+          className="button"
+          href={gmailComposeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Let’s work together <Arrow />
+        </a>
       </div>
     </section>
   );
@@ -177,7 +184,12 @@ export function Footer() {
               </a>
             );
           })}
-          <a href={"mailto:" + site.email} aria-label="Email Jean Monica">
+          <a
+            href={gmailComposeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Email Jean Monica"
+          >
             <Mail size={18} strokeWidth={1.5} />
           </a>
         </div>

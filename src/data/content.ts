@@ -13,6 +13,10 @@ export const site = {
     },
   ] as { label: string; url: string }[],
 };
+export const gmailComposeUrl =
+  "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+  encodeURIComponent(site.email);
+
 export const services = [
   [
     "Virtual Assistance",

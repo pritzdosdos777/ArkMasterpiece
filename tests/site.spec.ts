@@ -163,21 +163,42 @@ test("collections follow the Wix categories and artwork order", async ({
   await expect(page.locator(".project")).toHaveCount(7);
 });
 
-test("mockup consultation and service links lead to working inquiry pages", async ({
-  page,
-}) => {
+test("Gmail calls to action and service navigation work", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".hero h1")).toContainText("Creative Partner");
   await expect(page.locator(".compact-services .service")).toHaveCount(6);
   await expect(page.locator(".process li")).toHaveCount(4);
   await page
+    .context()
+    .route("https://mail.google.com/**", (route) =>
+      route.fulfill({
+        contentType: "text/html",
+        body: "<title>Gmail compose test</title>",
+      }),
+    );
+  const popupPromise = page.waitForEvent("popup");
+  await page
     .locator(".hero")
-    .getByRole("link", { name: "Book a consultation" })
+    .getByRole("link", { name: "Let’s work together" })
     .click();
-  await expect(page).toHaveURL(/contact/);
-  await expect(
-    page.getByRole("link", { name: "jeanmonicarche@gmail.com", exact: true }),
-  ).toHaveAttribute("href", "mailto:jeanmonicarche@gmail.com");
+  const popup = await popupPromise;
+  await popup.waitForLoadState();
+  const compose = new URL(popup.url());
+  expect(compose.origin).toBe("https://mail.google.com");
+  expect(compose.searchParams.get("to")).toBe("jeanmonicarche@gmail.com");
+  expect(compose.searchParams.get("view")).toBe("cm");
+  await popup.close();
+  for (const path of ["/", "/about", "/services", "/portfolio", "/contact"]) {
+    await page.goto(path);
+    for (const link of await page.locator('a[href*="mail.google.com"]').all()) {
+      const url = new URL((await link.getAttribute("href"))!);
+      expect(url.searchParams.get("to")).toBe("jeanmonicarche@gmail.com");
+      expect(url.searchParams.get("view")).toBe("cm");
+      await expect(link).toHaveAttribute("target", "_blank");
+    }
+    await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
+    await expect(page.locator(".nav-cta")).toHaveText("Let’s work together");
+  }
   await page.goto("/");
   await page
     .getByRole("link", { name: "Explore Social Media Management" })
@@ -215,4 +236,29 @@ test("lightbox switches between mockup and unchanged artwork", async ({
   await expect(dialog.locator("img")).toHaveAttribute("src", /mockups/);
   await page.keyboard.press("Escape");
   await expect(dialog).toHaveCount(0);
+});
+
+test("featured work uses the requested book cover and Moses design", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const showcase = page.locator(".preview-gallery");
+  await expect(showcase).toContainText("The Power of Words");
+  await expect(showcase).toContainText("Moses — Another Red Sea");
+  await expect(showcase).not.toContainText("Ahria’s Adventure");
+  await expect(showcase).not.toContainText("Live Not on Bread Alone");
+});
+
+test("video section lists the eight pending uploads without broken players", async ({
+  page,
+}) => {
+  await page.goto("/portfolio");
+  await page.getByRole("link", { name: "Explore video editing ↓" }).click();
+  await expect(page.locator("#video-heading")).toBeInViewport();
+  await expect(page.locator(".video-card")).toHaveCount(8);
+  await expect(page.locator(".video-pending")).toHaveCount(8);
+  await expect(page.locator(".video-card video")).toHaveCount(0);
+  await expect(page.locator(".video-portfolio")).toContainText(
+    "previews are being prepared",
+  );
 });

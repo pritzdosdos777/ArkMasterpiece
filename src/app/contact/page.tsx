@@ -1,6 +1,6 @@
 import { Intro } from "@/components/sections";
 import { ContactForm } from "@/components/contact-form";
-import { site } from "@/data/content";
+import { site, gmailComposeUrl } from "@/data/content";
 export const metadata = {
   title: "Contact",
   description:
@@ -27,7 +27,9 @@ export default function Page() {
           </p>
           <p className="eyebrow">EMAIL</p>
           {site.email ? (
-            <a href={"mailto:" + site.email}>{site.email}</a>
+            <a href={gmailComposeUrl} target="_blank" rel="noopener noreferrer">
+              {site.email}
+            </a>
           ) : (
             <p>Business email to be provided.</p>
           )}

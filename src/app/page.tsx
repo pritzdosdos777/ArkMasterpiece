@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Lightbulb, BadgeCheck, Sprout } from "lucide-react";
-import { portraits } from "@/data/content";
+import { portraits, gmailComposeUrl } from "@/data/content";
 import { Arrow, Reveal } from "@/components/ui";
 import { CTA, Services, Process } from "@/components/sections";
 import { Gallery } from "@/components/gallery";
@@ -33,9 +33,14 @@ export default function Home() {
               marketing, and reliable virtual assistance.
             </p>
             <div className="actions">
-              <Link className="button" href="/contact">
-                Book a consultation <Arrow />
-              </Link>
+              <a
+                className="button"
+                href={gmailComposeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Let’s work together <Arrow />
+              </a>
               <Link className="button button-outline" href="/portfolio">
                 View our work
               </Link>

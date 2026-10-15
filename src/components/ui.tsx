@@ -2,6 +2,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { gmailComposeUrl } from "@/data/content";
 import { Brand } from "./brand";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
@@ -52,13 +53,15 @@ export function Header() {
             {n}
           </Link>
         ))}
-        <Link
+        <a
           onClick={() => setOpen(false)}
           className="nav-cta"
-          href="/contact"
+          href={gmailComposeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Book a consultation <ArrowUpRight size={15} />
-        </Link>
+          Let’s work together <ArrowUpRight size={15} />
+        </a>
       </nav>
     </header>
   );
