@@ -1,0 +1,14 @@
+{
+  "sourceFile": "Menu Video.mov",
+  "sourceSha256": "3ce3803a1b87c3ca33bf9a65fbc9348653851863bc233503690bba2bec12fe51",
+  "sourceBytes": 16596696,
+  "src": "/brand/videos/menu-intro.mp4",
+  "poster": "/brand/videos/menu-intro.webp",
+  "posterTimestampSeconds": 1,
+  "webSha256": "d7491029e1a6b3849a32509a04d8194b99574bf2744da5d30161fddbb1907ae7",
+  "webBytes": 4617254,
+  "width": 1920,
+  "height": 1080,
+  "durationSeconds": 12.133333,
+  "processing": "H.264 CRF23, 1920x1080 30fps, AAC128k and faststart MP4; full framing/duration retained; original MOV retained in attachment workspace"
+}

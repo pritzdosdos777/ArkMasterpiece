@@ -5,10 +5,11 @@ import { portraits } from "@/data/content";
 import { Arrow, Reveal } from "@/components/ui";
 import { CTA, Services, Process } from "@/components/sections";
 import { Gallery } from "@/components/gallery";
+import { HeroVideo } from "@/components/hero-video";
 export default function Home() {
   return (
     <>
-      <section className="hero">
+      <HeroVideo>
         <Image
           className="hero-image"
           src="/brand/studio-desk.webp"
@@ -63,7 +64,7 @@ export default function Home() {
             </ul>
           </Reveal>
         </div>
-      </section>
+      </HeroVideo>
       <section className="section home-services">
         <div className="section-heading">
           <div>

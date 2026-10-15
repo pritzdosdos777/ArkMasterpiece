@@ -511,3 +511,102 @@ test("all portfolio images stay visible without motion on mobile", async ({
     ),
   ).toBe(true);
 });
+
+test("hero video appears after three seconds, dims the backdrop and can be dismissed", async ({
+  page,
+}) => {
+  await page.clock.install({ time: new Date("2026-10-16T00:00:00Z") });
+  await page.clock.pauseAt(new Date("2026-10-16T00:00:01Z"));
+  await page.goto("/");
+  const video = page.getByLabel("Ark Masterpiece introduction video", {
+    exact: true,
+  });
+  await expect(video).toHaveCount(0);
+  await page.clock.runFor(2999);
+  await expect(video).toHaveCount(0);
+  await page.clock.runFor(650);
+  await expect(video).toBeVisible();
+  await page.clock.resume();
+  await expect
+    .poll(() =>
+      page
+        .locator(".hero-image")
+        .evaluate((node) => Number(getComputedStyle(node).opacity)),
+    )
+    .toBeCloseTo(0.4, 1);
+  const radius = await page
+    .locator(".hero-video-frame")
+    .evaluate((node) => parseFloat(getComputedStyle(node).borderRadius));
+  expect(radius).toBeGreaterThanOrEqual(18);
+  await page.getByRole("button", { name: "Close introduction video" }).click();
+  await expect(video).toHaveCount(0);
+  await page.clock.runFor(650);
+  await expect
+    .poll(() =>
+      page
+        .locator(".hero-image")
+        .evaluate((node) => Number(getComputedStyle(node).opacity)),
+    )
+    .toBe(1);
+  await page.getByRole("button", { name: "Watch introduction" }).click();
+  await page.clock.runFor(650);
+  await expect(video).toBeVisible();
+});
+
+for (const width of [1440, 375]) {
+  test(`intro video playback and layout at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    const video = page.getByLabel("Ark Masterpiece introduction video", {
+      exact: true,
+    });
+    await expect(video).toBeVisible({ timeout: 7000 });
+    await expect
+      .poll(() =>
+        video.evaluate((node) => (node as HTMLVideoElement).currentTime),
+      )
+      .toBeGreaterThan(0.1);
+    expect(
+      await video.evaluate((node) => (node as HTMLVideoElement).muted),
+    ).toBe(true);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    const v = (await video.boundingBox())!;
+    const copy = (await page.locator(".hero-content").boundingBox())!;
+    if (width === 1440) expect(v.x).toBeGreaterThanOrEqual(copy.x + copy.width);
+    else expect(v.y).toBeGreaterThanOrEqual(copy.y + copy.height);
+    await page
+      .locator(".hero")
+      .getByRole("link", { name: "Let’s work together" })
+      .click();
+    await expect(page).toHaveURL(/\/contact$/);
+    await expect(video).toHaveCount(0);
+  });
+}
+
+test("reduced motion keeps the intro available without autoplay", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const video = page.getByLabel("Ark Masterpiece introduction video", {
+    exact: true,
+  });
+  await expect(video).toBeVisible({ timeout: 7000 });
+  expect(
+    await video.evaluate((node) => (node as HTMLVideoElement).paused),
+  ).toBe(true);
+  await video.evaluate(async (node) => {
+    const v = node as HTMLVideoElement;
+    v.muted = true;
+    await v.play();
+  });
+  await expect
+    .poll(() =>
+      video.evaluate((node) => (node as HTMLVideoElement).currentTime),
+    )
+    .toBeGreaterThan(0.1);
+});
