@@ -610,3 +610,39 @@ test("reduced motion keeps the intro available without autoplay", async ({
     )
     .toBeGreaterThan(0.1);
 });
+
+test("mobile introduction has a large reachable sound toggle", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    viewport: { width: 375, height: 812 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  await page.goto("/");
+  const video = page.getByLabel("Ark Masterpiece introduction video", {
+    exact: true,
+  });
+  const unmute = page.getByRole("button", {
+    name: "Unmute video",
+    exact: true,
+  });
+  await expect(unmute).toBeVisible({ timeout: 6000 });
+  await unmute.scrollIntoViewIfNeeded();
+  const bounds = (await unmute.boundingBox())!;
+  expect(bounds.height).toBeGreaterThanOrEqual(44);
+  expect(bounds.width).toBeGreaterThanOrEqual(44);
+  await unmute.tap();
+  await expect
+    .poll(() => video.evaluate((node) => (node as HTMLVideoElement).muted))
+    .toBe(false);
+  const mute = page.getByRole("button", { name: "Mute video", exact: true });
+  await expect(mute).toBeVisible();
+  await mute.tap();
+  await expect
+    .poll(() => video.evaluate((node) => (node as HTMLVideoElement).muted))
+    .toBe(true);
+  await expect(unmute).toBeVisible();
+  await context.close();
+});

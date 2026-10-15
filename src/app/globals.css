@@ -2328,3 +2328,32 @@ textarea {
     0 0 52px 10px #c4a77d40,
     0 24px 80px #0009;
 }
+
+.hero-video-sound {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  min-width: 160px;
+  margin-top: 12px;
+  padding: 12px 18px;
+  border: 1px solid #e4bf8b;
+  border-radius: 12px;
+  background: #e4bf8b;
+  color: #171310;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.hero-video-sound:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+@media (max-width: 1100px) {
+  .hero-video-sound {
+    width: 100%;
+  }
+}

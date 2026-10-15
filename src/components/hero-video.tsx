@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { X, Volume2, VolumeX } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 
 export function HeroVideo({ children }: { children: React.ReactNode }) {
   const reduced = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -27,6 +29,8 @@ export function HeroVideo({ children }: { children: React.ReactNode }) {
         >
           <div className="hero-video-frame">
             <video
+              ref={videoRef}
+              id="hero-introduction-video"
               aria-label="Ark Masterpiece introduction video"
               src="/brand/videos/menu-intro.mp4"
               poster="/brand/videos/menu-intro.webp"
@@ -34,7 +38,12 @@ export function HeroVideo({ children }: { children: React.ReactNode }) {
               height={1080}
               controls
               autoPlay={!reduced}
-              muted
+              muted={muted}
+              onVolumeChange={(event) =>
+                setMuted(
+                  event.currentTarget.muted || event.currentTarget.volume === 0,
+                )
+              }
               loop={!reduced}
               playsInline
               preload="metadata"
@@ -46,12 +55,33 @@ export function HeroVideo({ children }: { children: React.ReactNode }) {
               aria-label="Close introduction video"
               onClick={() => {
                 setVisible(false);
+                setMuted(true);
                 setDismissed(true);
               }}
             >
               <X size={18} aria-hidden="true" />
             </button>
           </div>
+          <button
+            type="button"
+            className="hero-video-sound"
+            aria-controls="hero-introduction-video"
+            onClick={() => {
+              const video = videoRef.current;
+              if (!video) return;
+              const shouldMute = !video.muted && video.volume > 0;
+              video.muted = shouldMute;
+              if (!shouldMute && video.volume === 0) video.volume = 1;
+              setMuted(shouldMute);
+            }}
+          >
+            {muted ? (
+              <VolumeX size={20} aria-hidden="true" />
+            ) : (
+              <Volume2 size={20} aria-hidden="true" />
+            )}
+            {muted ? "Unmute video" : "Mute video"}
+          </button>
           {failed && (
             <p role="status">
               Unable to load the video.{" "}

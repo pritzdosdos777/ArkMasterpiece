@@ -111,3 +111,9 @@ Production build, lint and TypeScript passed. All **12 targeted browser tests pa
 ## Intro delay shortened
 
 Changed the homepage intro delay to one second. The controlled-clock browser test verifies the video is absent at 999 ms and appears after the one-second threshold; backdrop dimming and close/reopen still pass. Production build and the one targeted browser test passed. No other player behavior changed. Public Vercel redeployment remains unverified.
+
+## Accessible mobile introduction audio toggle
+
+Added a separate, prominently labeled “Unmute video / Mute video” button below the hero player. It is at least 48px tall and full-width on mobile/tablet, avoiding reliance on the small native media controls. It controls the actual media element's mute state and stays synchronized with native volume events. Closing resets the intro to muted. The one-second reveal, rounded corners, glow, background dimming and reduced-motion behavior remain intact.
+
+Production build, lint and TypeScript passed. All **10 targeted browser tests passed**, including simulated mobile touch taps that unmute/mute the actual media element, minimum tap-target size, one-second timing, close/reopen, desktop/mobile playback/layout and reduced-motion behavior. Actual audible output on physical iOS/Android hardware was not assessed. Public Vercel deployment remains unverified.
