@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-for (const width of [375, 768, 1440]) {
+for (const width of [320, 375, 768, 1024, 1440]) {
   test(`navigation and layout at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     for (const path of ["/", "/about", "/services", "/portfolio", "/contact"]) {
@@ -78,22 +78,29 @@ test("migrated gallery filters original artwork and supports the lightbox", asyn
     page.getByRole("button", { name: "Websites & Funnels", exact: true }),
   ).toHaveCount(0);
 });
-test("all migrated artwork and portraits load", async ({ page }) => {
+test("all mockups, original artwork, and portraits load", async ({ page }) => {
   test.setTimeout(120000);
   await page.goto("/portfolio");
-  const images = page.locator(".project img");
-  for (let i = 0; i < 43; i++) {
-    const image = images.nth(i);
-    await image.scrollIntoViewIfNeeded();
-    await expect(image).toBeVisible();
-    await expect
-      .poll(() =>
-        image.evaluate((e) => {
-          const img = e as HTMLImageElement;
-          return img.complete && img.naturalWidth > 0;
-        }),
-      )
-      .toBe(true);
+  for (const mode of ["Mockup presentations", "Original artwork"]) {
+    await page
+      .getByRole("group", { name: "Portfolio display" })
+      .getByRole("button", { name: mode, exact: true })
+      .click();
+    const images = page.locator(".project img");
+    await expect(images).toHaveCount(43);
+    for (let i = 0; i < 43; i++) {
+      const image = images.nth(i);
+      await image.scrollIntoViewIfNeeded();
+      await expect(image).toBeVisible();
+      await expect
+        .poll(() =>
+          image.evaluate((e) => {
+            const img = e as HTMLImageElement;
+            return img.complete && img.naturalWidth > 0;
+          }),
+        )
+        .toBe(true);
+    }
   }
   for (const route of ["/", "/about"]) {
     await page.goto(route);
@@ -173,4 +180,35 @@ test("mockup consultation and service links lead to working inquiry pages", asyn
     .click();
   await expect(page).toHaveURL(/services#social-media$/);
   await expect(page.locator("#social-media")).toBeInViewport();
+});
+
+test("gold logo loads in header and footer", async ({ page }) => {
+  await page.goto("/");
+  const logos = page.locator(".brand-symbol img");
+  await expect(logos).toHaveCount(2);
+  for (const image of await logos.all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => image.evaluate((e) => (e as HTMLImageElement).naturalWidth))
+      .toBeGreaterThan(0);
+  }
+});
+test("lightbox switches between mockup and unchanged artwork", async ({
+  page,
+}) => {
+  await page.goto("/portfolio");
+  await page.getByRole("button", { name: "Book Covers", exact: true }).click();
+  await page.locator(".project").first().click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.locator("img")).toHaveAttribute("src", /mockups/);
+  await dialog
+    .getByRole("button", { name: "Show original artwork", exact: true })
+    .click();
+  await expect(dialog.locator("img")).toHaveAttribute("src", /book-covers/);
+  await dialog
+    .getByRole("button", { name: "Show mockup presentation", exact: true })
+    .click();
+  await expect(dialog.locator("img")).toHaveAttribute("src", /mockups/);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
 });
