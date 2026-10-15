@@ -55,4 +55,12 @@ Before public launch: finish Wix migration, confirm services and copy, supply lo
 
 ## Review / merge
 
-Branch: `feat/ark-masterpiece-website`. Review the commit diff, then push with `git push -u origin feat/ark-masterpiece-website` if not already pushed. Open a pull request against `main` with title “Build Ark Masterpiece portfolio website”; include `docs/MIGRATION.md` and validation results in the review. No paid services or deployment are authorized by this implementation.
+Branch: `feat/ark-masterpiece-website` (pushed to GitHub). This was an empty repository with no `main` commit, so a pull request against `main` cannot yet be created. Review the feature branch directly on GitHub. After approval, initialize `main` from the reviewed feature branch:
+
+```sh
+git fetch origin
+git switch -c main origin/feat/ark-masterpiece-website
+git push -u origin main
+```
+
+Then select `main` as the default branch in GitHub repository settings. If a `main` branch has since been created, use a normal pull request instead and resolve any history differences deliberately. No public website deployment or paid service is authorized by this implementation.
